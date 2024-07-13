@@ -19,7 +19,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#131313"
-      }
+      },
+      "package": "com.maarin_lucas.Sjurados"
     },
     "web": {
       "bundler": "metro",
@@ -42,4 +43,3 @@
     }
   }
 }
-

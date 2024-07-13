@@ -23,9 +23,9 @@ export default function Routes() {
                 screenOptions={{ headerShown: false }}
                 initialRouteName='Login'>
                     
-                <Stack.Screen name="Login" component={Login} />
+                <Stack.Screen  name="Login" component={Login} />
 
-                <Stack.Screen name="Ferramenta" component={Ferramenta} />
+                <Stack.Screen  name="Ferramenta" component={Ferramenta} />
             </Stack.Navigator>
 
         </NavigationContainer>
