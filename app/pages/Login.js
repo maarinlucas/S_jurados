@@ -3,7 +3,6 @@ import { Button, StyleSheet, View, Text, TextInput, Alert, Image } from 'react-n
 import { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useNavigation } from '@react-navigation/native';
-import { LOGIN1_KEY, LOGIN2_KEY } from '../cores/.env';
 
 import * as SplashScreen from 'expo-splash-screen';
 SplashScreen.preventAutoHideAsync();
@@ -18,18 +17,16 @@ const Login = () => {
         setTimeout(async () => {
             // Esconde a splash screen após 3 segundos
             await SplashScreen.hideAsync();
-        }, 3000); 
+        }, 2000); // 3000 ms = 3 segundos
     }, []);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
 
-
-
-    var user1 = LOGIN1_KEY[0];
-    var pass1 = LOGIN1_KEY[1];
-    var user2 = LOGIN2_KEY[0];
-    var pass2 = LOGIN2_KEY[1]
+    var user1 = 'Lucas';
+    var pass1 = '29599157';
+    var user2 = 'juanqueirozx'
+    var pass2 = 'appdejurados01@'
 
 
     useEffect(() => {
@@ -59,8 +56,8 @@ const Login = () => {
 
                 console.log(error);
             }
-        } else if (username === user2 && password === pass2) {
-            try {
+        } else if(username === user2 && password === pass2){
+           try {
                 await AsyncStorage.setItem('loggedIn', 'true');
                 Alert.alert('Logado com sucesso!');
                 navegar()
@@ -69,7 +66,7 @@ const Login = () => {
 
                 console.log(error);
             }
-        } else {
+        }else{
             Alert.alert('Usuário ou senha incorretos');
         }
     };
