@@ -3,6 +3,7 @@ import { Button, StyleSheet, View, Text, TextInput, Alert, Image } from 'react-n
 import { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useNavigation } from '@react-navigation/native';
+import { LOGIN1_KEY, LOGIN2_KEY } from '../cores/.env';
 
 import * as SplashScreen from 'expo-splash-screen';
 SplashScreen.preventAutoHideAsync();
@@ -11,24 +12,24 @@ SplashScreen.preventAutoHideAsync();
 
 const Login = () => {
 
-    
+
     useEffect(() => {
         // Simula uma tarefa de inicialização (ex: carregar dados)
         setTimeout(async () => {
-          // Esconde a splash screen após 3 segundos
-          await SplashScreen.hideAsync();
-        }, 2000); // 3000 ms = 3 segundos
-      }, []);
+            // Esconde a splash screen após 3 segundos
+            await SplashScreen.hideAsync();
+        }, 3000); 
+    }, []);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    
 
-    const IS_DEBUG = process.env.NODE_ENV === 'development';
 
-    if (IS_DEBUG) {
-        var user1 = 'Lucas';
-        var pass1 = '29599157';
-    }
+
+
+    var user1 = LOGIN1_KEY[0];
+    var pass1 = LOGIN1_KEY[1];
+    var user2 = LOGIN2_KEY[0];
+    var pass2 = LOGIN2_KEY[1]
 
 
     useEffect(() => {
@@ -58,6 +59,16 @@ const Login = () => {
 
                 console.log(error);
             }
+        } else if (username === user2 && password === pass2) {
+            try {
+                await AsyncStorage.setItem('loggedIn', 'true');
+                Alert.alert('Logado com sucesso!');
+                navegar()
+
+            } catch (error) {
+
+                console.log(error);
+            }
         } else {
             Alert.alert('Usuário ou senha incorretos');
         }
@@ -65,7 +76,7 @@ const Login = () => {
 
     const navigation = useNavigation();
 
- 
+
 
 
 
@@ -93,9 +104,9 @@ const Login = () => {
             <View style={styles.btn}>
                 <Button title='Login' onPress={handleLogin} />
             </View>
-            
-                <Text style={styles.copy}>© 2024 BatalhaDosS. Todos os direitos reservados.</Text>
-            
+
+            <Text style={styles.copy}>© 2024 BatalhaDosS. Todos os direitos reservados.</Text>
+
 
         </View>
     );
