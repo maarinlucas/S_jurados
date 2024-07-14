@@ -9,11 +9,12 @@
     "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./assets/images/splash.png",
-      "resizeMode": "contain",
+      "resizeMode": "cover",
       "backgroundColor": "#131313"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "buildNumber": "1.0.0"
     },
     "android": {
       "adaptiveIcon": {
@@ -21,7 +22,8 @@
         "backgroundColor": "#131313"
       },
       "buildType": "apk",
-      "package": "com.maarin_lucas.Sjurados"
+      "package": "com.maarin_lucas.Sjurados",
+      "versionCode": 1
     },
     "web": {
       "bundler": "metro",
