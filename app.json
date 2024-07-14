@@ -9,20 +9,18 @@
     "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./assets/images/splash.png",
-      "resizeMode": "cover",
+      "resizeMode": "contain",
       "backgroundColor": "#131313"
     },
     "ios": {
-      "supportsTablet": true,
-      "buildNumber": "1.0.0"
+      "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#131313"
       },
-      "package": "com.maarin_lucas.Sjurados",
-      "versionCode": 1
+      "package": "com.maarin_lucas.Sjurados"
     },
     "web": {
       "bundler": "metro",
