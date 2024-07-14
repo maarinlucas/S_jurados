@@ -21,7 +21,6 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#131313"
       },
-      "buildType": "apk",
       "package": "com.maarin_lucas.Sjurados",
       "versionCode": 1
     },
