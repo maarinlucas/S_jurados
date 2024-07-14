@@ -716,11 +716,13 @@ const styles = StyleSheet.create({
 
   container: {
     paddingHorizontal: 30,
-    paddingVertical: 25,
+    paddingVertical: 30,
+    paddingTop: 45,
     backgroundColor: '#131313',
     height: '100%',
     width: '100%',
     alignItems: 'center',
+    justifyContent: 'center',
     display: 'flex',
     rowGap: 10
   },
@@ -735,6 +737,7 @@ const styles = StyleSheet.create({
   },
   save: {
     width: '100%',
+    marginBottom:10,
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between'
@@ -747,12 +750,12 @@ const styles = StyleSheet.create({
   inputs: {
     display: 'flex',
     flexDirection: 'row',
-    columnGap: 40,
+    columnGap: 60,
 
   },
 
   input: {
-    width: 120,
+    width: 135,
     height: 32,
     borderColor: 'white',
     backgroundColor: 'white',
@@ -760,6 +763,7 @@ const styles = StyleSheet.create({
   },
   btn: {
     width: 200,
+    paddingVertical: 5
   },
 
   parte2: {
@@ -767,11 +771,11 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-around'
+    justifyContent: 'space-around',
   },
   name1: {
     backgroundColor: 'red',
-    width: 150,
+    width: 135,
     display: 'flex',
     height: 55,
     color: 'white',
@@ -781,7 +785,7 @@ const styles = StyleSheet.create({
   },
   name2: {
     backgroundColor: 'blue',
-    width: 150,
+    width: 135,
     display: 'flex',
     height: 55,
     color: 'white',
@@ -795,7 +799,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
     display: 'flex',
     textAlign: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   competidor1: {
     justifyContent: 'center',
@@ -822,7 +826,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between'
   },
   btns: {
-    width: 60
+    width: 60,
   },
 
   cols: {
@@ -928,7 +932,7 @@ const styles = StyleSheet.create({
   },
   dateB: {
     fontSize: 15,
-    display:'flex',
+    display: 'flex',
     alignItems: 'center'
   },
   nomeB: {

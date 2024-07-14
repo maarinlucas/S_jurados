@@ -17,15 +17,15 @@ const Login = () => {
         setTimeout(async () => {
             // Esconde a splash screen após 3 segundos
             await SplashScreen.hideAsync();
-        }, 2000); // 3000 ms = 3 segundos
+        }, 4000); // 3000 ms = 3 segundos
     }, []);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
 
-    var user1 = 'Lucas';
+    var user1 = 'Maarin_lucas';
     var pass1 = '29599157';
-    var user2 = 'juanqueirozx'
+    var user2 = 'Juanqueirozx'
     var pass2 = 'appdejurados01@'
 
 
