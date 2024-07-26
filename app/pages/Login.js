@@ -3,7 +3,6 @@ import { Button, StyleSheet, View, Text, TextInput, Alert, Image } from 'react-n
 import { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useNavigation } from '@react-navigation/native';
-
 import * as SplashScreen from 'expo-splash-screen';
 SplashScreen.preventAutoHideAsync();
 
@@ -23,7 +22,7 @@ const Login = () => {
     const [password, setPassword] = useState('');
 
 
-    var user1 = 'Maarin_lucas';
+    var user1 = 'Lucas';
     var pass1 = '29599157';
     var user2 = 'Juanqueirozx'
     var pass2 = 'appdejurados01@'
@@ -103,7 +102,6 @@ const Login = () => {
             </View>
 
             <Text style={styles.copy}>© 2024 BatalhaDosS. Todos os direitos reservados.</Text>
-
 
         </View>
     );

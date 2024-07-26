@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, Image, TouchableOpacity, Alert, FlatList, Modal, SafeAreaView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import AsyncStorage from '@react-native-async-storage/async-storage'
-
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import CheckBox from 'expo-checkbox';
+/* import RNFS from 'react-native-fs'; */
 
 
 export default function Ferramenta() {
@@ -164,6 +164,78 @@ export default function Ferramenta() {
     }
   };
 
+  const [selectedIds, setSelectedIds] = useState([]);
+
+  const toggleSelectItem = (id) => {
+    if (selectedIds.includes(id)) {
+      setSelectedIds(selectedIds.filter(selectedId => selectedId !== id));
+    } else {
+      setSelectedIds([...selectedIds, id]);
+    }
+  };
+
+  const removeSelectedItems = () => {
+    const newItems = items.filter(item => !selectedIds.includes(item.id));
+    setItems(newItems);
+    saveItems(newItems);
+    setSelectedIds([]);
+  };
+  const deselectAllItems = () => {
+    setSelectedIds([]);
+  };
+
+  const clearAllItems = () => {
+    Alert.alert(
+      'Confirmar Remoção',
+      'Você tem certeza de que deseja remover todos os itens do histórico?',
+      [
+        {
+          text: 'Cancelar',
+          style: 'cancel',
+        },
+        {
+          text: 'Remover',
+          onPress: async () => {
+            try {
+              await AsyncStorage.removeItem('items');
+              setItems([]);
+              setSelectedIds([]);
+              Alert.alert('Todos os itens foram removidos do histórico.');
+            } catch (error) {
+              console.error(error);
+            }
+          },
+        },
+      ],
+    );
+  };
+  /*  const saveToCSV = async () => {
+     const csvRows = [
+       ['ID', 'MC1', 'MC2', 'Ponto1', 'Ponto2', 'Execucao1', 'Execucao2', 'Conclusao1', 'Conclusao2'],
+       ...items.map(item => [
+         item.id,
+         item.mc1,
+         item.mc2,
+         item.ponto1,
+         item.ponto2,
+         item.execucao1,
+         item.execucao2,
+         item.conclusao1,
+         item.conclusao2,
+       ]),
+     ];
+ 
+     const csvString = csvRows.map(row => row.join(',')).join('\n');
+ 
+     const path = RNFS.DocumentDirectoryPath + '/historico.csv';
+     try {
+       await RNFS.writeFile(path, csvString);
+       Alert.alert('Arquivo CSV salvo', `O arquivo CSV foi salvo em ${path}`);
+     } catch (error) {
+       console.error(error);
+       Alert.alert('Erro ao salvar o arquivo', 'Não foi possível salvar o arquivo CSV.');
+     }
+   }; */
 
   return (
     <View style={styles.container}>
@@ -633,7 +705,9 @@ export default function Ferramenta() {
 
       <Modal visible={modalVisible1} >
         <View style={styles.container2} >
+
           <View style={styles.logoBtnB}>
+
             <View style={styles.btnB}>
               <Button
                 color="#48474C"
@@ -641,51 +715,91 @@ export default function Ferramenta() {
                 onPress={closeModal1}
               />
 
+              <Button
+                color="#48474C"
+                title="Limpar Histórico"
+                onPress={clearAllItems}
+              />
+
+
             </View>
 
 
+            <View style={{ height: 60, justifyContent: 'space-between', display: 'flex', flexDirection: 'row', paddingHorizontal: 15 }}>
+
+              {selectedIds.length > 0 && (
+                <View style={{ width: 170, display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+                  <TouchableOpacity onPress={deselectAllItems} style={{ width: 50, justifyContent: 'center', display: 'flex', height: 35, borderRadius: 20, width: 35, alignItems: 'center' }}>
+                    <Image style={{
+                      width: 26,
+                      height: 26,
+                    }} source={require('../imagens/cross.png')} />
+
+                  </TouchableOpacity>
+                  <Text style={{
+                    color: 'white',
+                    textAlign: 'center',
+                    fontSize: 15,
+                    height: 40,
+                    display: 'flex',
+                    alignItems: 'center'
+                  }}>{`${selectedIds.length} selecionado(s)`}</Text>
+                </View>
+
+              )}
+
+
+              {selectedIds.length > 0 && (
+                <TouchableOpacity onPress={removeSelectedItems} style={styles.actionButtonB}>
+
+                  <Text style={{ color: '#CDB3F4', fontSize: 14, borderWidth: 1, borderColor: '#CDB3F4', padding: 9, borderRadius: 20, width: 90,height:40, textAlign: 'center', justifyContent: 'center', display: 'flex' }}>Excluir</Text>
+                </TouchableOpacity>
+              )}
+
+
+            </View>
           </View>
+
+
 
           <FlatList
             style={{ width: '100%' }}
             data={items}
             keyExtractor={item => item.id}
             renderItem={({ item }) => (
-              <View
-                colors={['#4c669f', '#3b5998', '#192f6a']}
-                style={styles.gradientBorder}
 
-              >
 
-                <TouchableOpacity
-                  style={styles.actionButtonB}
-                  onPress={() => removeItem(item.id)}
+
+              <View style={styles.placarListB}>
+
+                <View
+                  style={{ paddingHorizontal: 20 }}
                 >
+                  <CheckBox
+                    value={selectedIds.includes(item.id)}
+                    onValueChange={() => toggleSelectItem(item.id)}
+                  />
+                </View>
 
-                  <Image style={styles.excluirB} source={require('../imagens/excluir.png')} />
-                  <Text style={{ color: 'red' }}>Excluir</Text>
-                </TouchableOpacity>
-                <View style={styles.placarListB}>
+                <View style={styles.placaresB}>
+                  <View style={styles.placarB}>
+                    <Text style={styles.nomeB}>{item.mc1}</Text>
+                    <Text style={styles.pontoB}>Pontos: {item.ponto1}{'\n'}Err Ex: {item.execucao1} {'\n'}Err Cnc: {item.conclusao1}</Text>
+                  </View>
+                  <View style={styles.centroB}>
+                    <Text style={styles.dateB}><Text style={{ color: '#9A65E8' }}>Data do Evento</Text>{'\n'}
+                      <Text>{data}</Text>
+                    </Text>
 
-                  <View style={styles.placaresB}>
-                    <View style={styles.placarB}>
-                      <Text style={styles.nomeB}>{item.mc1}</Text>
-                      <Text style={styles.pontoB}>Pontos: {item.ponto1}{'\n'}Err Ex: {item.execucao1} {'\n'}Err Cnc: {item.conclusao1}</Text>
-                    </View>
-                    <View style={styles.centroB}>
-                      <Text style={styles.dateB}><Text style={{ color: '#9A65E8' }}>Data do Evento</Text>{'\n'}
-                        <Text>{data}</Text>
-                      </Text>
-                      <Text style={styles.xB}>X</Text>
 
-                    </View>
-                    <View style={styles.placarB}>
-                      <Text style={styles.nomeB}>{item.mc2}</Text>
-                      <Text style={styles.pontoB}>Pontos: {item.ponto2}{'\n'}Err Ex: {item.execucao2} {'\n'}Err Cnc: {item.conclusao2}</Text>
-                    </View>
+                  </View>
+                  <View style={styles.placarB}>
+                    <Text style={styles.nomeB}>{item.mc2}</Text>
+                    <Text style={styles.pontoB}>Pontos: {item.ponto2}{'\n'}Err Ex: {item.execucao2} {'\n'}Err Cnc: {item.conclusao2}</Text>
                   </View>
                 </View>
               </View>
+
             )}
           />
         </View>
@@ -737,7 +851,7 @@ const styles = StyleSheet.create({
   },
   save: {
     width: '100%',
-    marginBottom:10,
+    marginBottom: 10,
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between'
@@ -878,32 +992,37 @@ const styles = StyleSheet.create({
     rowGap: 18,
     backgroundColor: '#131313',
   },
-  gradientBorder: {
-    width: '100%',
-    marginBottom: 20,
-    backgroundColor: 'white',
-    height: 250,
-    display: 'flex',
-    justifyContent: 'center',
-    padding: 3,
-    borderRadius: 10,
-    borderStyle: 'solid'
-  },
+  /*   gradientBorder: {
+      width: '100%',
+      marginBottom: 20,
+      backgroundColor: 'white',
+      height: 200,
+      display: 'flex',
+      justifyContent: 'center',
+      padding: 3,
+      borderRadius: 10,
+      borderStyle: 'solid'
+    }, */
   actionButtonB: {
     width: 65,
     height: '20%',
     display: 'flex',
     alignItems: 'center',
-    marginTop: 20,
-    marginLeft: 15
   },
   excluirB: {
     width: 25,
     height: 25,
   },
   placarListB: {
+    rowGap: 5,
     width: '100%',
-    rowGap: 5
+    marginBottom: 20,
+    backgroundColor: 'white',
+    height: 200,
+    display: 'flex',
+    justifyContent: 'center',
+    padding: 3,
+    borderStyle: 'solid'
   },
   placaresB: {
     display: 'flex',
@@ -925,11 +1044,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     height: '80%',
   },
-  xB: {
+  /* xB: {
     color: 'bLack',
     fontSize: 40,
     height: '100%'
-  },
+  }, */
   dateB: {
     fontSize: 15,
     display: 'flex',
@@ -952,7 +1071,10 @@ const styles = StyleSheet.create({
   },
   btnB: {
     alignSelf: 'flex-start',
-    width: 100
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between'
 
   },
   logoBtnB: {
