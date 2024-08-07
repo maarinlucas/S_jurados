@@ -22,59 +22,44 @@ const Login = () => {
     const [password, setPassword] = useState('');
 
 
-    var user1 = 'Lucas';
-    var pass1 = '29599157';
-    var user2 = 'Juanqueirozx'
-    var pass2 = 'appdejurados01@'
-
-
-    useEffect(() => {
-        const checkLoginStatus = async () => {
-            try {
-                const loggedIn = await AsyncStorage.getItem('loggedIn');
-
-            } catch (error) {
-                console.log(error);
-
-            }
-        };
-
-        checkLoginStatus();
-    }, []);
+    
+    var user1 = ['Lucas','29599157']
+    var user2 = ['Juanqueirozx','appdejurados01@']
+    
+   const navigation = useNavigation();
     function navegar() {
         navigation.navigate('Ferramenta')
     }
-    const handleLogin = async () => {
-        if (username === user1 && password === pass1) {
-            try {
-                await AsyncStorage.setItem('loggedIn', 'true');
-                Alert.alert('Logado com sucesso!');
-                navegar()
+ 
+    useEffect(() => {
+        checkLoginStatus();
+      }, []);
+    
 
-            } catch (error) {
-
-                console.log(error);
-            }
-        } else if(username === user2 && password === pass2){
-           try {
-                await AsyncStorage.setItem('loggedIn', 'true');
-                Alert.alert('Logado com sucesso!');
-                navegar()
-
-            } catch (error) {
-
-                console.log(error);
-            }
-        }else{
-            Alert.alert('Usuário ou senha incorretos');
+      const checkLoginStatus = async () => {
+        try {
+          const isLoggedIn = await AsyncStorage.getItem('loggedIn');
+          if (isLoggedIn) {
+            navigation.navigate('Ferramenta');
+          }
+        } catch (error) {
+          console.log(error);
         }
-    };
-
-    const navigation = useNavigation();
-
-
-
-
+      };
+    
+      const handleLogin = async () => {
+        if ((username === user1[0] && password === user1[1]) || (username === user2[0] && password === user2[1])) { 
+          try {
+            await AsyncStorage.setItem('loggedIn', 'true');
+            navigation.navigate('Ferramenta');
+          } catch (error) {
+            console.log(error);
+            Alert.alert('Erro ao fazer login.');
+          }
+        } else {
+          Alert.alert('Credenciais inválidas.');
+        }
+      };
 
 
     return (
@@ -98,15 +83,13 @@ const Login = () => {
                 secureTextEntry
             />
             <View style={styles.btn}>
-                <Button title='Login' onPress={handleLogin} />
+                <Button color="#3A1F7C" title='Login'  onPress={handleLogin} />
             </View>
 
             <Text style={styles.copy}>© 2024 BatalhaDosS. Todos os direitos reservados.</Text>
 
         </View>
     );
-
-
 
 };
 

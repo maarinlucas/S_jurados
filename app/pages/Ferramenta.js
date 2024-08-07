@@ -11,8 +11,8 @@ export default function Ferramenta() {
 
   const [inputValue1, setInputValue1] = useState('');
   const [inputValue2, setInputValue2] = useState('');
-  const [mc1, setMc1] = useState('');
-  const [mc2, setMc2] = useState('');
+  const [mc1, setMc1] = useState(inputValue1);
+  const [mc2, setMc2] = useState(inputValue2);
   const [conclusao1, setConclusao1] = useState(0);
   const [execucao1, setExecucao1] = useState(0);
   const [conclusao2, setConclusao2] = useState(0);
@@ -55,20 +55,21 @@ export default function Ferramenta() {
   const handleSave1 = (i1) => {
     setMc1(i1)
 
-    setInputValue1('');
 
   };
   const handleSave2 = (i2) => {
     setMc2(i2)
 
-    setInputValue2('');
 
   };
+
   const handleSave = () => {
     handleSave1(inputValue1)
     handleSave2(inputValue2)
-
   };
+
+
+
   const [items, setItems] = useState([]);
 
   useEffect(() => {
@@ -108,7 +109,18 @@ export default function Ferramenta() {
     saveItems(newItems);
   };
 
+  const clearInput1 = () => {
+    setMc1('');
+    setInputValue1('')
+  }
+  const clearInput2 = () => {
+    setMc2('');
+    setInputValue2('')
+  }
+
+
   const handleAddItem = () => {
+    handleSave
     Alert.alert('Placar salvo no histórico!');
     addItem(mc1, mc2, ponto1, ponto2, execucao1, execucao2, conclusao1, conclusao2);
     setMc1('');
@@ -119,6 +131,8 @@ export default function Ferramenta() {
     setExecucao2(0);
     setConclusao1(0);
     setConclusao2(0);
+
+
   };
 
   const currentDate = new Date();
@@ -152,12 +166,13 @@ export default function Ferramenta() {
     setModalVisible2(false);
   };
 
-  const handleLogout = async () => {
+ 
 
+  const handleLogout = async () => {
     try {
       await AsyncStorage.removeItem('loggedIn');
-      setModalVisible2(false)
-      navigation.navigate('Login')
+      setModalVisible2(false);
+      navigation.navigate('Login');
     } catch (error) {
       console.log(error);
       Alert.alert(error);
@@ -209,33 +224,6 @@ export default function Ferramenta() {
       ],
     );
   };
-  /*  const saveToCSV = async () => {
-     const csvRows = [
-       ['ID', 'MC1', 'MC2', 'Ponto1', 'Ponto2', 'Execucao1', 'Execucao2', 'Conclusao1', 'Conclusao2'],
-       ...items.map(item => [
-         item.id,
-         item.mc1,
-         item.mc2,
-         item.ponto1,
-         item.ponto2,
-         item.execucao1,
-         item.execucao2,
-         item.conclusao1,
-         item.conclusao2,
-       ]),
-     ];
- 
-     const csvString = csvRows.map(row => row.join(',')).join('\n');
- 
-     const path = RNFS.DocumentDirectoryPath + '/historico.csv';
-     try {
-       await RNFS.writeFile(path, csvString);
-       Alert.alert('Arquivo CSV salvo', `O arquivo CSV foi salvo em ${path}`);
-     } catch (error) {
-       console.error(error);
-       Alert.alert('Erro ao salvar o arquivo', 'Não foi possível salvar o arquivo CSV.');
-     }
-   }; */
 
   return (
     <View style={styles.container}>
@@ -316,46 +304,41 @@ export default function Ferramenta() {
         </View>
 
 
-        <View style={styles.inputs}>
-          <TextInput
-            onChangeText={handleInputChange1}
-            value={inputValue1}
-            style={styles.input}
-            placeholder='Mc 1'
-
-          />
-
-          <TextInput
-            onChangeText={handleInputChange2}
-            value={inputValue2}
-            style={styles.input}
-            placeholder='Mc 2'
-
-          />
-        </View>
-        <View
-          style={styles.btn}
-        >
-          <Button
-            color="#48474C"
-            title="Enviar Nomes"
-            onPress={handleSave}
-          />
-
-        </View>
-
       </View>
 
 
       <View style={styles.parte2}>
 
         <View style={styles.competidor1}>
-          <Text style={styles.name1} >{mc1}</Text>
+          <Text style={styles.name1} >
+            <TextInput
+              onChangeText={handleInputChange1}
+              value={inputValue1}
+              style={styles.input}
+              onFocus={clearInput1}
+              onBlur={handleSave}
+              placeholder='Digite um Nome...'
+              placeholderTextColor={'rgba(255, 255, 255, 0.5)'}
+              underlineColorAndroid="transparent" // Remove a linha de sublinhado no Android
+
+            />
+          </Text>
           <Text style={styles.placar} >{ponto1}</Text>
         </View>
 
         <View style={styles.competidor2}>
-          <Text style={styles.name2}>{mc2}</Text>
+          <Text style={styles.name2}>
+            <TextInput
+              style={styles.input}
+              onChangeText={handleInputChange2}
+              value={inputValue2}
+              onFocus={clearInput2}
+              onBlur={handleSave}
+              placeholder='Digite um Nome...'
+              placeholderTextColor={'rgba(255, 255, 255, 0.5)'}
+              underlineColorAndroid="transparent" // Remove a linha de sublinhado no Android
+            />
+          </Text>
           <Text style={styles.placar}>{ponto2}</Text>
 
         </View>
@@ -709,17 +692,23 @@ export default function Ferramenta() {
           <View style={styles.logoBtnB}>
 
             <View style={styles.btnB}>
+
               <Button
                 color="#48474C"
                 title='Voltar'
                 onPress={closeModal1}
               />
 
+
+
               <Button
                 color="#48474C"
                 title="Limpar Histórico"
                 onPress={clearAllItems}
               />
+
+
+
 
 
             </View>
@@ -752,7 +741,7 @@ export default function Ferramenta() {
               {selectedIds.length > 0 && (
                 <TouchableOpacity onPress={removeSelectedItems} style={styles.actionButtonB}>
 
-                  <Text style={{ color: '#CDB3F4', fontSize: 14, borderWidth: 1, borderColor: '#CDB3F4', padding: 9, borderRadius: 20, width: 90,height:40, textAlign: 'center', justifyContent: 'center', display: 'flex' }}>Excluir</Text>
+                  <Text style={{ color: '#CDB3F4', fontSize: 14, borderWidth: 1, borderColor: '#CDB3F4', padding: 9, borderRadius: 20, width: 90, height: 40, textAlign: 'center', justifyContent: 'center', display: 'flex' }}>Excluir</Text>
                 </TouchableOpacity>
               )}
 
@@ -763,7 +752,7 @@ export default function Ferramenta() {
 
 
           <FlatList
-            style={{ width: '100%' }}
+            style={{ width: '100%', padding: 10 }}
             data={items}
             keyExtractor={item => item.id}
             renderItem={({ item }) => (
@@ -787,7 +776,7 @@ export default function Ferramenta() {
                     <Text style={styles.pontoB}>Pontos: {item.ponto1}{'\n'}Err Ex: {item.execucao1} {'\n'}Err Cnc: {item.conclusao1}</Text>
                   </View>
                   <View style={styles.centroB}>
-                    <Text style={styles.dateB}><Text style={{ color: '#9A65E8' }}>Data do Evento</Text>{'\n'}
+                    <Text style={styles.dateB}>
                       <Text>{data}</Text>
                     </Text>
 
@@ -870,10 +859,20 @@ const styles = StyleSheet.create({
 
   input: {
     width: 135,
-    height: 32,
-    borderColor: 'white',
-    backgroundColor: 'white',
+    height: '100%',
+    backgroundColor: 'rgba(255, 255, 255, 0.1)', // Torna o input transparente
+    color: 'white',
+    borderColor: 'transparent', // Remove a borda inicial
+    borderWidth: 1,
+    paddingHorizontal: 10,
     textAlign: 'center',
+  },
+
+  inputFocused: {
+    borderColor: 'transparent', // Remove a borda ao focar
+  },
+  styledInput: {
+    fontSize: 9,
   },
   btn: {
     width: 200,
@@ -894,8 +893,9 @@ const styles = StyleSheet.create({
     height: 55,
     color: 'white',
     fontSize: 20,
-    padding: 10,
-    textAlign: 'center'
+    textAlign: 'center',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   name2: {
     backgroundColor: 'blue',
@@ -904,8 +904,9 @@ const styles = StyleSheet.create({
     height: 55,
     color: 'white',
     fontSize: 20,
-    padding: 10,
-    textAlign: 'center'
+    textAlign: 'center',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   placar: {
     width: '100%',
@@ -985,6 +986,7 @@ const styles = StyleSheet.create({
   },
   container2: {
     display: 'flex',
+    flex: 1,
     alignItems: 'center',
     height: '100%',
     width: '100%',
@@ -1017,16 +1019,17 @@ const styles = StyleSheet.create({
     rowGap: 5,
     width: '100%',
     marginBottom: 20,
-    backgroundColor: 'white',
+    backgroundColor: '#42017C',
     height: 200,
     display: 'flex',
     justifyContent: 'center',
-    padding: 3,
+    padding: 10,
     borderStyle: 'solid'
+
   },
   placaresB: {
     display: 'flex',
-    backgroundColor: 'white',
+    backgroundColor: '#42017C',
     height: '80%',
     width: '100%',
     padding: 10,
@@ -1050,19 +1053,23 @@ const styles = StyleSheet.create({
     height: '100%'
   }, */
   dateB: {
-    fontSize: 15,
+    fontSize: 16,
     display: 'flex',
-    alignItems: 'center'
+    alignItems: 'center',
+    color: 'white',
+    fontWeight: 'bold'
   },
   nomeB: {
-    fontSize: 20,
-    color: '#9A65E8',
-    marginBottom: 5
+    fontSize: 22,
+    color: 'white',
+    marginBottom: 5,
+    fontWeight: 'bold'
   },
   pontoB: {
-    fontSize: 14,
+    fontSize: 16,
     width: '100%',
-    textAlign: 'center'
+    textAlign: 'center',
+    color: 'white',
   },
   logoB: {
     width: 80,
@@ -1076,6 +1083,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between'
 
+  },
+  btnCont: {
+    borderRadius: 20, // Muda o border radius aqui
+    overflow: 'hidden', // Necessário para o borderRadius funcionar
   },
   logoBtnB: {
     display: 'flex',
@@ -1117,6 +1128,3 @@ const styles = StyleSheet.create({
     width: '100%'
   }
 });
-
-
-
