@@ -83,7 +83,7 @@ const Login = () => {
                 secureTextEntry
             />
             <View style={styles.btn}>
-                <Button color="#3A1F7C" title='Login'  onPress={handleLogin} />
+                <Button color={cor5} title='Login'  onPress={handleLogin} />
             </View>
 
             <Text style={styles.copy}>© 2024 BatalhaDosS. Todos os direitos reservados.</Text>
@@ -93,17 +93,21 @@ const Login = () => {
 
 };
 
+import { corFundo, cor5 } from '../colors'
+
+
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
         padding: 16,
-        backgroundColor: '#131313'
+        backgroundColor: corFundo
     },
     copy: {
         padding: 20,
-        color: '#666',
+        color: 'white',
         fontSize: 12,
 
     },

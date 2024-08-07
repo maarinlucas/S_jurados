@@ -4,7 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import CheckBox from 'expo-checkbox';
 /* import RNFS from 'react-native-fs'; */
-
+import { corFundo, cor2, cor3, cor3b, cor3c, cor3d, cor3e, cor3f, cor3g, cor3h, cor3i, cor3j } from '../colors'
 
 export default function Ferramenta() {
   const navigation = useNavigation();
@@ -103,11 +103,11 @@ export default function Ferramenta() {
     saveItems(newItems);
   };
 
-  const removeItem = (id) => {
-    const newItems = items.filter(item => item.id !== id);
-    setItems(newItems);
-    saveItems(newItems);
-  };
+  /*  const removeItem = (id) => {
+     const newItems = items.filter(item => item.id !== id);
+     setItems(newItems);
+     saveItems(newItems);
+   }; */
 
   const clearInput1 = () => {
     setMc1('');
@@ -123,8 +123,6 @@ export default function Ferramenta() {
     handleSave
     Alert.alert('Placar salvo no histórico!');
     addItem(mc1, mc2, ponto1, ponto2, execucao1, execucao2, conclusao1, conclusao2);
-    setMc1('');
-    setMc2('');
     setPonto1(0);
     setPonto2(0);
     setExecucao1(0);
@@ -148,7 +146,6 @@ export default function Ferramenta() {
   function abrir() {
     setModalVisible2(false)
   }
-
   const openModal1 = () => {
     setTimeout(abrir, 1000)
     setModalVisible1(true)
@@ -166,7 +163,7 @@ export default function Ferramenta() {
     setModalVisible2(false);
   };
 
- 
+
 
   const handleLogout = async () => {
     try {
@@ -229,7 +226,7 @@ export default function Ferramenta() {
     <View style={styles.container}>
 
       <Modal visible={modalVisible2}>
-        <SafeAreaView style={styles.container3} >
+        <SafeAreaView style={styles.container3}>
 
           <View style={styles.contentC}>
             <TouchableOpacity
@@ -244,22 +241,19 @@ export default function Ferramenta() {
                 style={styles.btnC}
               >
                 <Button
-                  color="#48474C"
-                  title="Histórico de batalhas"
+                  color={cor3b}
+                  title="Histórico"
                   onPress={openModal1}
                 />
 
               </View>
 
-              <View
-                style={styles.btnC}
-              >
-              </View>
+            
               <View
                 style={styles.btnC}
               >
                 <Button
-                  color="#48474C"
+                  color={cor3b}
                   title="Sair"
                   onPress={() => handleLogout()}
                 />
@@ -296,7 +290,7 @@ export default function Ferramenta() {
             style={styles.btnSave}
           >
             <Button
-              color="#48474C"
+              color={cor3}
               title="Salvar Resultados"
               onPress={handleAddItem}
             />
@@ -309,36 +303,39 @@ export default function Ferramenta() {
 
       <View style={styles.parte2}>
 
-        <View style={styles.competidor1}>
-          <Text style={styles.name1} >
+        <View style={styles.competidor}>
+          <Text style={{ color: 'white', fontSize: 16, fontWeight: 'bold' }}>MC 1</Text>
+          <View style={styles.name} >
+
             <TextInput
               onChangeText={handleInputChange1}
               value={inputValue1}
-              style={styles.input}
+              style={[styles.input, styles.name]}
               onFocus={clearInput1}
               onBlur={handleSave}
-              placeholder='Digite um Nome...'
+              placeholder='Digitar...'
               placeholderTextColor={'rgba(255, 255, 255, 0.5)'}
-              underlineColorAndroid="transparent" // Remove a linha de sublinhado no Android
+
 
             />
-          </Text>
+          </View>
           <Text style={styles.placar} >{ponto1}</Text>
         </View>
 
-        <View style={styles.competidor2}>
-          <Text style={styles.name2}>
+        <View style={styles.competidor}>
+          <Text style={{ color: 'white', fontSize: 16, fontWeight: 'bold' }}>MC 2</Text>
+          <View style={styles.name}>
             <TextInput
-              style={styles.input}
+              style={[styles.input, styles.name]}
               onChangeText={handleInputChange2}
               value={inputValue2}
               onFocus={clearInput2}
               onBlur={handleSave}
-              placeholder='Digite um Nome...'
+              placeholder='Digitar...'
               placeholderTextColor={'rgba(255, 255, 255, 0.5)'}
-              underlineColorAndroid="transparent" // Remove a linha de sublinhado no Android
+
             />
-          </Text>
+          </View>
           <Text style={styles.placar}>{ponto2}</Text>
 
         </View>
@@ -353,7 +350,7 @@ export default function Ferramenta() {
               style={styles.btns}
             >
               <Button
-                color="#2D9639"
+                color={cor3b}
                 title="0.5"
                 onPress={() => setPonto1(ponto1 + 0.5)} />
             </View>
@@ -361,7 +358,7 @@ export default function Ferramenta() {
               style={styles.btns}
             >
               <Button
-                color="#2D9639"
+                color={cor3b}
                 title="1.0"
                 onPress={() => setPonto1(ponto1 + 1)} />
             </View>
@@ -371,7 +368,7 @@ export default function Ferramenta() {
               style={styles.btns}
             >
               <Button
-                color="#2D9639"
+                color={cor3c}
                 title="1.25"
                 onPress={() => setPonto1(ponto1 + 1.25)} />
             </View>
@@ -379,7 +376,7 @@ export default function Ferramenta() {
               style={styles.btns}
             >
               <Button
-                color="#2D9639"
+                color={cor3c}
                 title="1.5"
                 onPress={() => setPonto1(ponto1 + 1.5)} />
             </View>
@@ -389,7 +386,7 @@ export default function Ferramenta() {
               style={styles.btns}
             >
               <Button
-                color="#2D9639"
+                color={cor3d}
                 title="1.75"
                 onPress={() => setPonto1(ponto1 + 1.75)} />
             </View>
@@ -397,7 +394,7 @@ export default function Ferramenta() {
               style={styles.btns}
             >
               <Button
-                color="#2D9639"
+                color={cor3d}
                 title="2.0"
                 onPress={() => setPonto1(ponto1 + 2.0)} />
             </View>
@@ -407,7 +404,7 @@ export default function Ferramenta() {
               style={styles.btns}
             >
               <Button
-                color="#C27D06"
+                color={cor3e}
                 title="2.25"
                 onPress={() => setPonto1(ponto1 + 2.25)} />
             </View>
@@ -415,7 +412,7 @@ export default function Ferramenta() {
               style={styles.btns}
             >
               <Button
-                color="#C27D06"
+                color={cor3e}
                 title="2.5"
                 onPress={() => setPonto1(ponto1 + 2.5)} />
             </View>
@@ -425,7 +422,7 @@ export default function Ferramenta() {
               style={styles.btns}
             >
               <Button
-                color="#C27D06"
+                color={cor3f}
                 title="2.75"
                 onPress={() => setPonto1(ponto1 + 2.75)} />
             </View>
@@ -433,7 +430,7 @@ export default function Ferramenta() {
               style={styles.btns}
             >
               <Button
-                color="#C27D06"
+                color={cor3f}
                 title="3.0"
                 onPress={() => setPonto1(ponto1 + 3.0)} />
             </View>
@@ -443,7 +440,7 @@ export default function Ferramenta() {
               style={styles.btns}
             >
               <Button
-                color="#940104"
+                color={cor3g}
                 title="3.25"
                 onPress={() => setPonto1(ponto1 + 3.25)} />
             </View>
@@ -451,7 +448,7 @@ export default function Ferramenta() {
               style={styles.btns}
             >
               <Button
-                color="#940104"
+                color={cor3g}
                 title="3.5"
                 onPress={() => setPonto1(ponto1 + 3.5)} />
             </View>
@@ -461,7 +458,7 @@ export default function Ferramenta() {
               style={styles.btns}
             >
               <Button
-                color="#940104"
+                color={cor3h}
                 title="3.75"
                 onPress={() => setPonto1(ponto1 + 3.75)} />
             </View>
@@ -469,44 +466,38 @@ export default function Ferramenta() {
               style={styles.btns}
             >
               <Button
-                color="#940104"
+                color={cor3h}
                 title="4.0"
                 onPress={() => setPonto1(ponto1 + 4.0)} />
             </View>
           </View>
-          <View style={styles.rowsErr}>
-            <View
-              style={styles.btnsPenalidade}
-            >
-              <Button
-                color="#42017C"
-                title={`Err Exec`}
-                onPress={() => ex1()}
 
-              />
-            </View>
+          <View style={styles.rowsErr}>
+
+            <TouchableOpacity
+              style={styles.btnsPenalidade}
+              onPress={() => ex1()}
+            >
+              <Text style={{ backgroundColor: cor3i, color: 'white', fontSize: 12, textAlign: 'center', padding: 3, height: 40 }}>ERRO DE EXECUÇÃO</Text>
+
+            </TouchableOpacity>
             <Text style={styles.errContagem1}>{execucao1}</Text>
           </View>
 
           <View style={styles.rowsErr}>
-            <View
+
+            <TouchableOpacity
               style={styles.btnsPenalidade}
+              onPress={() => conc1()}
             >
-              <Button
-                color="#42017C"
-                title={`Err Conc`}
-                onPress={() => conc1()}
-              />
+              <Text style={{ backgroundColor: cor3i, color: 'white', fontSize: 12, textAlign: 'center', padding: 3, height: 40 }}>ERRO DE CONCLUSÃO</Text>
 
-            </View>
+            </TouchableOpacity>
             <Text style={styles.errContagem1}>{conclusao1}</Text>
-
-
           </View>
 
 
         </View>
-
 
 
         <View style={styles.cols}>
@@ -516,7 +507,7 @@ export default function Ferramenta() {
               style={styles.btns}
             >
               <Button
-                color="#2D9639"
+                color={cor3b}
                 title="0.5"
                 onPress={() => setPonto2(ponto2 + 0.5)} />
             </View>
@@ -524,7 +515,7 @@ export default function Ferramenta() {
               style={styles.btns}
             >
               <Button
-                color="#2D9639"
+                color={cor3b}
                 title="1.0"
                 onPress={() => setPonto2(ponto2 + 1)} />
             </View>
@@ -534,7 +525,7 @@ export default function Ferramenta() {
               style={styles.btns}
             >
               <Button
-                color="#2D9639"
+                color={cor3c}
                 title="1.25"
                 onPress={() => setPonto2(ponto2 + 1.25)} />
             </View>
@@ -542,7 +533,7 @@ export default function Ferramenta() {
               style={styles.btns}
             >
               <Button
-                color="#2D9639"
+                color={cor3c}
                 title="1.5"
                 onPress={() => setPonto2(ponto2 + 1.5)} />
             </View>
@@ -552,7 +543,7 @@ export default function Ferramenta() {
               style={styles.btns}
             >
               <Button
-                color="#2D9639"
+                color={cor3d}
                 title="1.75"
                 onPress={() => setPonto2(ponto2 + 1.75)} />
             </View>
@@ -560,7 +551,7 @@ export default function Ferramenta() {
               style={styles.btns}
             >
               <Button
-                color="#2D9639"
+                color={cor3d}
                 title="2.0"
                 onPress={() => setPonto2(ponto2 + 2.0)} />
             </View>
@@ -570,7 +561,7 @@ export default function Ferramenta() {
               style={styles.btns}
             >
               <Button
-                color="#C27D06"
+                color={cor3e}
                 title="2.25"
                 onPress={() => setPonto2(ponto2 + 2.25)} />
             </View>
@@ -578,7 +569,7 @@ export default function Ferramenta() {
               style={styles.btns}
             >
               <Button
-                color="#C27D06"
+                color={cor3e}
                 title="2.5"
                 onPress={() => setPonto2(ponto2 + 2.5)} />
             </View>
@@ -588,7 +579,7 @@ export default function Ferramenta() {
               style={styles.btns}
             >
               <Button
-                color="#C27D06"
+                color={cor3f}
                 title="2.75"
                 onPress={() => setPonto2(ponto2 + 2.75)} />
             </View>
@@ -596,7 +587,7 @@ export default function Ferramenta() {
               style={styles.btns}
             >
               <Button
-                color="#C27D06"
+                color={cor3f}
                 title="3.0"
                 onPress={() => setPonto2(ponto2 + 3.0)} />
             </View>
@@ -606,7 +597,7 @@ export default function Ferramenta() {
               style={styles.btns}
             >
               <Button
-                color="#940104"
+                color={cor3g}
                 title="3.25"
                 onPress={() => setPonto2(ponto2 + 3.25)} />
             </View>
@@ -614,7 +605,7 @@ export default function Ferramenta() {
               style={styles.btns}
             >
               <Button
-                color="#940104"
+                color={cor3g}
                 title="3.5"
                 onPress={() => setPonto2(ponto2 + 3.5)} />
             </View>
@@ -624,7 +615,7 @@ export default function Ferramenta() {
               style={styles.btns}
             >
               <Button
-                color="#940104"
+                color={cor3h}
                 title="3.75"
                 onPress={() => setPonto2(ponto2 + 3.75)} />
             </View>
@@ -632,38 +623,32 @@ export default function Ferramenta() {
               style={styles.btns}
             >
               <Button
-                color="#940104"
+                color={cor3h}
                 title="4.0"
                 onPress={() => setPonto2(ponto2 + 4.0)} />
             </View>
           </View>
           <View style={styles.rowsErr}>
             <Text style={styles.errContagem1}>{execucao2}</Text>
-            <View
+            <TouchableOpacity
               style={styles.btnsPenalidade}
+              onPress={() => ex2()}
             >
-              <Button
-                color="#42017C"
-                title={`Err Exec`}
-                onPress={() => ex2()}
+              <Text style={{ backgroundColor: cor3i, color: 'white', fontSize: 12, textAlign: 'center', padding: 3, height: 40 }}>ERRO DE EXECUÇÃO</Text>
 
-              />
-            </View>
+            </TouchableOpacity>
 
           </View>
 
           <View style={styles.rowsErr}>
             <Text style={styles.errContagem1}>{conclusao2}</Text>
-            <View
+            <TouchableOpacity
               style={styles.btnsPenalidade}
+              onPress={() => conc2()}
             >
-              <Button
-                color="#42017C"
-                title={`Err Conc`}
-                onPress={() => conc2()}
-              />
+              <Text style={{ backgroundColor: cor3i, color: 'white', fontSize: 12, textAlign: 'center', padding: 3, height: 40 }}>ERRO DE CONCLUSÃO</Text>
 
-            </View>
+            </TouchableOpacity>
 
           </View>
 
@@ -679,7 +664,7 @@ export default function Ferramenta() {
           style={styles.btnZerar}
         >
           <Button
-            color="#48474C"
+            color={cor3i}
             title="zerar"
             onPress={zerar} />
 
@@ -694,22 +679,16 @@ export default function Ferramenta() {
             <View style={styles.btnB}>
 
               <Button
-                color="#48474C"
+                color={cor3b}
                 title='Voltar'
                 onPress={closeModal1}
               />
 
-
-
               <Button
-                color="#48474C"
+                color={cor3b}
                 title="Limpar Histórico"
                 onPress={clearAllItems}
               />
-
-
-
-
 
             </View>
 
@@ -762,7 +741,7 @@ export default function Ferramenta() {
               <View style={styles.placarListB}>
 
                 <View
-                  style={{ paddingHorizontal: 20 }}
+                  style={{ backgroundColor:'white', width:20 }}
                 >
                   <CheckBox
                     value={selectedIds.includes(item.id)}
@@ -771,22 +750,55 @@ export default function Ferramenta() {
                 </View>
 
                 <View style={styles.placaresB}>
+
                   <View style={styles.placarB}>
                     <Text style={styles.nomeB}>{item.mc1}</Text>
-                    <Text style={styles.pontoB}>Pontos: {item.ponto1}{'\n'}Err Ex: {item.execucao1} {'\n'}Err Cnc: {item.conclusao1}</Text>
-                  </View>
-                  <View style={styles.centroB}>
-                    <Text style={styles.dateB}>
-                      <Text>{data}</Text>
-                    </Text>
 
-
+                    <View style={styles.pontosB}>
+                      <View style={styles.pontoB}>
+                        <Text >Pontos:</Text>
+                        <Text style={styles.p}>{item.ponto1}</Text>
+                      </View>
+                      <View style={styles.pontoB}>
+                        <Text >Err Ex:</Text>
+                        <Text style={styles.ex}>{item.execucao1}</Text>
+                      </View>
+                      <View style={styles.pontoB}>
+                        <Text >Err Concl:</Text>
+                        <Text style={styles.ec}>{item.conclusao1}</Text>
+                      </View>
+                    </View>
                   </View>
+                  <View style={{ display: 'flex', alignItems: 'center' }}>
+
+                    <Text style={styles.xB}>Data da Batalha:</Text>
+                    <Text style={styles.dateB}>{data}</Text>
+                    <View style={{ width: '100%', display: 'flex', }}>
+                      <Image style={styles.logoB} source={require('../imagens/logoc.png')} />
+                    </View>
+                  </View>
+
                   <View style={styles.placarB}>
                     <Text style={styles.nomeB}>{item.mc2}</Text>
-                    <Text style={styles.pontoB}>Pontos: {item.ponto2}{'\n'}Err Ex: {item.execucao2} {'\n'}Err Cnc: {item.conclusao2}</Text>
+                    <View style={styles.pontosB}>
+
+                      <View style={styles.pontoB}>
+                        <Text >Pontos:</Text>
+                        <Text style={styles.p}>{item.ponto2}</Text>
+                      </View>
+                      <View style={styles.pontoB}>
+                        <Text >Erro Ex:</Text>
+                        <Text style={styles.ex}>{item.execucao2}</Text>
+                      </View>
+                      <View style={styles.pontoB}>
+                        <Text >Err Concl:</Text>
+                        <Text style={styles.ec}>{item.conclusao2}</Text>
+                      </View>
+                    </View>
                   </View>
+
                 </View>
+
               </View>
 
             )}
@@ -821,7 +833,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
     paddingVertical: 30,
     paddingTop: 45,
-    backgroundColor: '#131313',
+    backgroundColor: corFundo,
     height: '100%',
     width: '100%',
     alignItems: 'center',
@@ -860,20 +872,17 @@ const styles = StyleSheet.create({
   input: {
     width: 135,
     height: '100%',
-    backgroundColor: 'rgba(255, 255, 255, 0.1)', // Torna o input transparente
+    /*   backgroundColor: 'rgba(255, 255, 255, 0.1)', // Torna o input transparente */
     color: 'white',
     borderColor: 'transparent', // Remove a borda inicial
     borderWidth: 1,
     paddingHorizontal: 10,
     textAlign: 'center',
+    fontSize: 15,
+    fontWeight: 'bold'
   },
 
-  inputFocused: {
-    borderColor: 'transparent', // Remove a borda ao focar
-  },
-  styledInput: {
-    fontSize: 9,
-  },
+
   btn: {
     width: 200,
     paddingVertical: 5
@@ -886,28 +895,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-around',
   },
-  name1: {
-    backgroundColor: 'red',
+  name: {
+    backgroundColor: cor3b,
     width: 135,
     display: 'flex',
     height: 55,
     color: 'white',
-    fontSize: 20,
+    fontSize: 13,
     textAlign: 'center',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    borderRadius: 10
   },
-  name2: {
-    backgroundColor: 'blue',
-    width: 135,
-    display: 'flex',
-    height: 55,
-    color: 'white',
-    fontSize: 20,
-    textAlign: 'center',
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
+
   placar: {
     width: '100%',
     color: 'white',
@@ -916,14 +916,12 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     alignItems: 'center',
   },
-  competidor1: {
-    justifyContent: 'center',
-    display: 'flex',
 
-  },
-  competidor2: {
+  competidor: {
     justifyContent: 'center',
     display: 'flex',
+    alignItems: 'center',
+    rowGap: 6
   },
   open: {
     width: 40,
@@ -942,6 +940,7 @@ const styles = StyleSheet.create({
   },
   btns: {
     width: 60,
+    borderRadius: 10
   },
 
   cols: {
@@ -970,19 +969,27 @@ const styles = StyleSheet.create({
     columnGap: 5,
   },
   btnZerar: {
-    width: 300,
-    marginTop: 10
+    width: 200,
+    marginTop: 10,
+    borderRadius: 10
   },
   btnsPenalidade: {
-    width: 100
+    width: 100,
+    height: 40,
+    borderRadius: 10
   },
   errContagem1: {
     color: 'white',
-    backgroundColor: '#42017C',
+    backgroundColor: cor3i,
     width: '20%',
-    fontSize: 20,
+    padding: 2,
+    height: '100%',
+    fontSize: 15,
     textAlign: 'center',
-    color: 'white'
+    justifyContent: 'center',
+    alignItems: 'center',
+    color: 'white',
+    borderRadius: 5
   },
   container2: {
     display: 'flex',
@@ -992,19 +999,9 @@ const styles = StyleSheet.create({
     width: '100%',
     paddingVertical: 20,
     rowGap: 18,
-    backgroundColor: '#131313',
+    backgroundColor: corFundo,
   },
-  /*   gradientBorder: {
-      width: '100%',
-      marginBottom: 20,
-      backgroundColor: 'white',
-      height: 200,
-      display: 'flex',
-      justifyContent: 'center',
-      padding: 3,
-      borderRadius: 10,
-      borderStyle: 'solid'
-    }, */
+
   actionButtonB: {
     width: 65,
     height: '20%',
@@ -1019,57 +1016,74 @@ const styles = StyleSheet.create({
     rowGap: 5,
     width: '100%',
     marginBottom: 20,
-    backgroundColor: '#42017C',
+    backgroundColor: cor2,
     height: 200,
     display: 'flex',
     justifyContent: 'center',
-    padding: 10,
-    borderStyle: 'solid'
+    padding: 20,
+    borderStyle: 'solid',
+    borderWidth: 4,
+    borderColor: cor3,
+    borderRadius: 10
 
   },
   placaresB: {
     display: 'flex',
-    backgroundColor: '#42017C',
-    height: '80%',
+    height: '100%',
     width: '100%',
-    padding: 10,
-    paddingBottom: 20,
+    padding: 12,
     justifyContent: 'center',
-    alignItems: 'center',
     flexDirection: 'row'
   },
   placarB: {
     alignItems: 'center',
-    width: '45%',
+    width: '40%',
     justifyContent: 'center',
   },
   centroB: {
     alignItems: 'center',
     height: '80%',
+    width: '33%',
   },
-  /* xB: {
-    color: 'bLack',
-    fontSize: 40,
-    height: '100%'
-  }, */
+  xB: {
+   fontWeight: 'bold',
+    fontSize: 16,
+    color: 'white',
+  },
   dateB: {
     fontSize: 16,
     display: 'flex',
     alignItems: 'center',
-    color: 'white',
-    fontWeight: 'bold'
+    color: 'black',
   },
   nomeB: {
-    fontSize: 22,
+    fontSize: 20,
     color: 'white',
     marginBottom: 5,
     fontWeight: 'bold'
   },
-  pontoB: {
-    fontSize: 16,
+  pontosB: {
+    fontSize: 14,
     width: '100%',
     textAlign: 'center',
-    color: 'white',
+    color: 'black'
+  },
+  pontoB: {
+    display: 'flex',
+    flexDirection: 'row',
+    columnGap: 6,
+    width: '100%',
+    justifyContent: 'center',
+    rowGap: 5
+  },
+  p: {
+    fontSize: 17,
+  },
+  ex: {
+    fontSize: 17,
+  },
+  ec: {
+    fontSize: 17,
   },
   logoB: {
     width: 80,
@@ -1097,10 +1111,10 @@ const styles = StyleSheet.create({
   container3: {
     width: '100%',
     flex: 1,
-    backgroundColor: '#131313'
+    backgroundColor: corFundo
   },
   contentC: {
-    backgroundColor: '#131313',
+    backgroundColor: corFundo,
     padding: 33,
     height: '100%',
     width: '100%'
@@ -1120,8 +1134,8 @@ const styles = StyleSheet.create({
     height: '100%',
     display: 'flex',
     alignItems: 'center',
-    paddingHorizontal: 30,
-    paddingVertical: 250,
+    paddingHorizontal: 10,
+    paddingVertical: 100,
     rowGap: 20,
   },
   btnC: {
