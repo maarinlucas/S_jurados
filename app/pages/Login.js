@@ -24,7 +24,7 @@ const Login = () => {
 
     
     var user1 = ['Lucas','29599157']
-    var user2 = ['Juanqueirozx','appdejurados01@']
+    var user2 = ['Juanqueirozx','OrgBatalhado$']
     
    const navigation = useNavigation();
     function navegar() {
@@ -86,7 +86,7 @@ const Login = () => {
                 <Button color={cor5} title='Login'  onPress={handleLogin} />
             </View>
 
-            <Text style={styles.copy}>© 2024 BatalhaDosS. Todos os direitos reservados.</Text>
+            <Text style={styles.copy}>© 2024 BatalhaDoS. Todos os direitos reservados.</Text>
 
         </View>
     );

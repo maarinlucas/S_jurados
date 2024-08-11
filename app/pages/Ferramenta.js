@@ -248,7 +248,7 @@ export default function Ferramenta() {
 
               </View>
 
-            
+
               <View
                 style={styles.btnC}
               >
@@ -495,7 +495,24 @@ export default function Ferramenta() {
             </TouchableOpacity>
             <Text style={styles.errContagem1}>{conclusao1}</Text>
           </View>
-
+          <View style={styles.rows}>
+            <View
+              style={styles.btns}
+            >
+              <Button
+                color={cor3j}
+                title="-0.50"
+                onPress={() => setPonto1(ponto1 - 0.50)} />
+            </View>
+            <View
+              style={styles.btns}
+            >
+              <Button
+                color={cor3j}
+                title="-0.25"
+                onPress={() => setPonto1(ponto1 - 0.25)} />
+            </View>
+          </View>
 
         </View>
 
@@ -652,6 +669,25 @@ export default function Ferramenta() {
 
           </View>
 
+          <View style={styles.rows}>
+            <View
+              style={styles.btns}
+            >
+              <Button
+                color={cor3j}
+                title="-0.50"
+                onPress={() => setPonto2(ponto2 - 0.50)} />
+            </View>
+            <View
+              style={styles.btns}
+            >
+              <Button
+                color={cor3j}
+                title="-0.25"
+                onPress={() => setPonto2(ponto2 - 0.25)} />
+            </View>
+          </View>
+
         </View>
 
 
@@ -664,7 +700,7 @@ export default function Ferramenta() {
           style={styles.btnZerar}
         >
           <Button
-            color={cor3i}
+            color={cor3}
             title="zerar"
             onPress={zerar} />
 
@@ -741,7 +777,7 @@ export default function Ferramenta() {
               <View style={styles.placarListB}>
 
                 <View
-                  style={{ backgroundColor:'white', width:20 }}
+                  style={{ backgroundColor: 'white', width: 20 }}
                 >
                   <CheckBox
                     value={selectedIds.includes(item.id)}
@@ -1046,7 +1082,7 @@ const styles = StyleSheet.create({
     width: '33%',
   },
   xB: {
-   fontWeight: 'bold',
+    fontWeight: 'bold',
     fontSize: 16,
     color: 'white',
   },
