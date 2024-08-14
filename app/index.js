@@ -6,6 +6,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
 import Ferramenta from './pages/Ferramenta'
 import Login from './pages/Login'
+import Interditado from './pages/interditado'
 
 
 
@@ -21,10 +22,10 @@ export default function Routes() {
         >
             <Stack.Navigator
                 screenOptions={{ headerShown: false }}
-                initialRouteName='Login'>
+                initialRouteName='Interditado'>
                     
                 <Stack.Screen  name="Login" component={Login} />
-
+                <Stack.Screen  name="Interditado" component={Interditado} />
                 <Stack.Screen  name="Ferramenta" component={Ferramenta} />
                 
             </Stack.Navigator>
