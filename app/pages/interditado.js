@@ -4,13 +4,14 @@ import { corFundo } from "../colors";
 const Interditado = () => {
   return (
     <View style={styles.container}>
-      <View style={{ width: 50, display: "flex", alignItems: 'center' }}>
+      <View style={{ width: 50, display: "flex", alignItems: "center" }}>
         <Image style={styles.logoB} source={require("../imagens/logo.png")} />
       </View>
       <View style={styles.box}>
         <Text style={styles.exclamation}>!</Text>
         <Text style={styles.text}>
-          App temporariamente indisponível {"\n"} Para mais informações, entre em contato com o desenvolvedor.
+          App temporariamente indisponível {"\n"} Para mais informações, entre
+          em contato com o desenvolvedor.
         </Text>
       </View>
     </View>
@@ -22,10 +23,10 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     padding: 20,
-    paddingVertical: '43%',
+    paddingVertical: "43%",
     backgroundColor: corFundo,
-    display: 'flex',
-    rowGap: 20
+    display: "flex",
+    rowGap: 20,
   },
   box: {
     backgroundColor: "white",
