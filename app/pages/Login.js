@@ -18,25 +18,25 @@ const Login = () => {
             await SplashScreen.hideAsync();
         }, 4000); // 3000 ms = 3 segundos
     }, []);
-    const [username, setUsername] = useState('');
+
     const [password, setPassword] = useState('');
 
 
     
-    var user1 = ['Lucas','29599157']
-    var user2 = ['Juanqueirozx','OrgBatalhado$']
+    var user1 = '29599157'
+    var user2 = 'OrgBatalhado$'
     
    const navigation = useNavigation();
     function navegar() {
         navigation.navigate('Ferramenta')
     }
- 
+ /* 
     useEffect(() => {
         checkLoginStatus();
       }, []);
-    
+     */
 
-      const checkLoginStatus = async () => {
+      /* const checkLoginStatus = async () => {
         try {
           const isLoggedIn = await AsyncStorage.getItem('loggedIn');
           if (isLoggedIn) {
@@ -45,19 +45,19 @@ const Login = () => {
         } catch (error) {
           console.log(error);
         }
-      };
+      }; */
     
       const handleLogin = async () => {
-        if ((username === user1[0] && password === user1[1]) || (username === user2[0] && password === user2[1])) { 
+        if ((password === user1) || (password === user2)) { 
           try {
-            await AsyncStorage.setItem('loggedIn', 'true');
+          /*   await AsyncStorage.setItem('loggedIn', 'true'); */
             navigation.navigate('Ferramenta');
           } catch (error) {
             console.log(error);
             Alert.alert('Erro ao fazer login.');
           }
         } else {
-          Alert.alert('Credenciais inválidas.');
+          Alert.alert('Senha inválida\nConsidere tirar os espaços desnecessários, se ouver.');
         }
       };
 
@@ -68,13 +68,8 @@ const Login = () => {
                 <Image style={styles.logoB} source={require('../imagens/logo.png')} />
             </View>
 
-            <Text style={styles.title}>$jurados - Login</Text>
-            <TextInput
-                style={styles.input}
-                placeholder='Usuário'
-                value={username}
-                onChangeText={setUsername}
-            />
+            <Text style={styles.title}>$jurados - Senha</Text>
+           
             <TextInput
                 style={styles.input}
                 placeholder='Senha'
@@ -83,7 +78,7 @@ const Login = () => {
                 secureTextEntry
             />
             <View style={styles.btn}>
-                <Button color={cor5} title='Login'  onPress={handleLogin} />
+                <Button color={cor5} title='Acessar'  onPress={handleLogin} />
             </View>
 
             <Text style={styles.copy}>© 2024 BatalhaDoS. Todos os direitos reservados.</Text>

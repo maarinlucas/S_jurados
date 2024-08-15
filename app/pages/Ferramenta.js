@@ -117,8 +117,6 @@ export default function Ferramenta() {
     setMc2('');
     setInputValue2('')
   }
-
-
   const handleAddItem = () => {
     handleSave
     Alert.alert('Placar salvo no histórico!');
@@ -167,7 +165,7 @@ export default function Ferramenta() {
 
   const handleLogout = async () => {
     try {
-      await AsyncStorage.removeItem('loggedIn');
+      /* await AsyncStorage.removeItem('loggedIn'); */
       setModalVisible2(false);
       navigation.navigate('Login');
     } catch (error) {
