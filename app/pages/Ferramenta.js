@@ -12,6 +12,7 @@ import {
   Modal,
   SafeAreaView,
   ScrollView,
+  BackHandler,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -47,6 +48,9 @@ export default function Ferramenta() {
   const [execucao2, setExecucao2] = useState(0);
   const [ponto1, setPonto1] = useState(0);
   const [ponto2, setPonto2] = useState(0);
+
+  const set1 = () => {};
+  const set2 = () => {};
 
   const zerar = () => {
     setExecucao1(0);
@@ -411,15 +415,21 @@ export default function Ferramenta() {
               <View style={styles.btns}>
                 <Button
                   color={cor3b}
-                  title="0.5"
-                  onPress={() => setPonto1(ponto1 + 0.5)}
+                  title="0.25"
+                  onPress={() => {
+                    handleSave();
+                    setPonto1(ponto1 + 0.25);
+                  }}
                 />
               </View>
               <View style={styles.btns}>
                 <Button
                   color={cor3b}
-                  title="1.0"
-                  onPress={() => setPonto1(ponto1 + 1)}
+                  title="0.5"
+                  onPress={() => {
+                    handleSave();
+                    setPonto1(ponto1 + 0.5);
+                  }}
                 />
               </View>
             </View>
@@ -427,95 +437,153 @@ export default function Ferramenta() {
               <View style={styles.btns}>
                 <Button
                   color={cor3c}
-                  title="1.25"
-                  onPress={() => setPonto1(ponto1 + 1.25)}
-                />
-              </View>
-              <View style={styles.btns}>
-                <Button
-                  color={cor3c}
-                  title="1.5"
-                  onPress={() => setPonto1(ponto1 + 1.5)}
-                />
-              </View>
-            </View>
-            <View style={styles.rows}>
-              <View style={styles.btns}>
-                <Button
-                  color={cor3d}
                   title="1.75"
-                  onPress={() => setPonto1(ponto1 + 1.75)}
+                  onPress={() => {
+                    handleSave();
+                    setPonto1(ponto1 + 0.75);
+                  }}
+                />
+              </View>
+              <View style={styles.btns}>
+                <Button
+                  color={cor3c}
+                  title="1.0"
+                  onPress={() => {
+                    handleSave();
+                    setPonto1(ponto1 + 1.0);
+                  }}
+                />
+              </View>
+            </View>
+            <View style={styles.rows}>
+              <View style={styles.btns}>
+                <Button
+                  color={cor3d}
+                  title="1.25"
+                  onPress={() => {
+                    handleSave();
+                    setPonto1(ponto1 + 1.25);
+                  }}
                 />
               </View>
               <View style={styles.btns}>
                 <Button
                   color={cor3d}
+                  title="1.5"
+                  onPress={() => {
+                    handleSave();
+                    setPonto1(ponto1 + 1.5);
+                  }}
+                />
+              </View>
+            </View>
+            <View style={styles.rows}>
+              <View style={styles.btns}>
+                <Button
+                  color={cor3e}
+                  title="1.75"
+                  onPress={() => {
+                    handleSave();
+                    setPonto1(ponto1 + 1.75);
+                  }}
+                />
+              </View>
+              <View style={styles.btns}>
+                <Button
+                  color={cor3e}
                   title="2.0"
-                  onPress={() => setPonto1(ponto1 + 2.0)}
+                  onPress={() => {
+                    handleSave();
+                    setPonto1(ponto1 + 2.0);
+                  }}
                 />
               </View>
             </View>
             <View style={styles.rows}>
               <View style={styles.btns}>
                 <Button
-                  color={cor3e}
+                  color={cor3f}
                   title="2.25"
-                  onPress={() => setPonto1(ponto1 + 2.25)}
+                  onPress={() => {
+                    handleSave();
+                    setPonto1(ponto1 + 2.25);
+                  }}
                 />
               </View>
               <View style={styles.btns}>
                 <Button
-                  color={cor3e}
+                  color={cor3f}
                   title="2.5"
-                  onPress={() => setPonto1(ponto1 + 2.5)}
+                  onPress={() => {
+                    handleSave();
+                    setPonto1(ponto1 + 2.5);
+                  }}
                 />
               </View>
             </View>
             <View style={styles.rows}>
               <View style={styles.btns}>
                 <Button
-                  color={cor3f}
+                  color={cor3g}
                   title="2.75"
-                  onPress={() => setPonto1(ponto1 + 2.75)}
+                  onPress={() => {
+                    handleSave();
+                    setPonto1(ponto1 + 2.75);
+                  }}
                 />
               </View>
               <View style={styles.btns}>
                 <Button
-                  color={cor3f}
+                  color={cor3g}
                   title="3.0"
-                  onPress={() => setPonto1(ponto1 + 3.0)}
+                  onPress={() => {
+                    handleSave();
+                    setPonto1(ponto1 + 3.0);
+                  }}
                 />
               </View>
             </View>
             <View style={styles.rows}>
               <View style={styles.btns}>
                 <Button
-                  color={cor3g}
+                  color={cor3h}
                   title="3.25"
-                  onPress={() => setPonto1(ponto1 + 3.25)}
+                  onPress={() => {
+                    handleSave();
+                    setPonto1(ponto1 + 3.25);
+                  }}
                 />
               </View>
               <View style={styles.btns}>
                 <Button
-                  color={cor3g}
+                  color={cor3h}
                   title="3.5"
-                  onPress={() => setPonto1(ponto1 + 3.5)}
+                  onPress={() => {
+                    handleSave();
+                    setPonto1(ponto1 + 3.5);
+                  }}
                 />
               </View>
             </View>
             <View style={styles.rows}>
               <View style={styles.btns}>
                 <Button
-                  color={cor3h}
+                  color={cor3i}
                   title="3.75"
-                  onPress={() => setPonto1(ponto1 + 3.75)}
+                  onPress={() => {
+                    handleSave();
+                    setPonto1(ponto1 + 3.75);
+                  }}
                 />
               </View>
               <View style={styles.btns}>
                 <Button
-                  color={cor3h}
+                  color={cor3i}
                   title="4.0"
-                  onPress={() => setPonto1(ponto1 + 4.0)}
+                  onPress={() => {
+                    handleSave();
+                    setPonto1(ponto1 + 4.0);
+                  }}
                 />
               </View>
             </View>
@@ -523,11 +591,14 @@ export default function Ferramenta() {
             <View style={styles.rowsErr}>
               <TouchableOpacity
                 style={styles.btnsPenalidade}
-                onPress={() => ex1()}
+                onPress={() => {
+                  handleSave();
+                  ex1();
+                }}
               >
                 <Text
                   style={{
-                    backgroundColor: cor3i,
+                    backgroundColor: cor3j,
                     color: "white",
                     fontSize: 12,
                     textAlign: "center",
@@ -544,11 +615,14 @@ export default function Ferramenta() {
             <View style={styles.rowsErr}>
               <TouchableOpacity
                 style={styles.btnsPenalidade}
-                onPress={() => conc1()}
+                onPress={() => {
+                  handleSave();
+                  conc1();
+                }}
               >
                 <Text
                   style={{
-                    backgroundColor: cor3j,
+                    backgroundColor: cor3k,
                     color: "white",
                     fontSize: 12,
                     textAlign: "center",
@@ -561,22 +635,6 @@ export default function Ferramenta() {
               </TouchableOpacity>
               <Text style={styles.errContagem1}>{conclusao1}</Text>
             </View>
-            <View style={styles.rows}>
-              <View style={styles.btns}>
-                <Button
-                  color={cor3k}
-                  title="-0.50"
-                  onPress={() => setPonto1(ponto1 - 0.5)}
-                />
-              </View>
-              <View style={styles.btns}>
-                <Button
-                  color={cor3k}
-                  title="-0.25"
-                  onPress={() => setPonto1(ponto1 - 0.25)}
-                />
-              </View>
-            </View>
           </View>
 
           <View style={styles.cols}>
@@ -584,140 +642,186 @@ export default function Ferramenta() {
               <View style={styles.btns}>
                 <Button
                   color={cor3b}
-                  title="0.5"
-                  onPress={() => setPonto2(ponto2 + 0.5)}
+                  title="0.25"
+                  onPress={() => {
+                    handleSave();
+                    setPonto1(ponto2 + 0.25);
+                  }}
                 />
               </View>
               <View style={styles.btns}>
                 <Button
                   color={cor3b}
-                  title="1.0"
-                  onPress={() => setPonto2(ponto2 + 1)}
-                />
-              </View>
-            </View>
-            <View style={styles.rows}>
-              <View style={styles.btns}>
-                <Button
-                  color={cor3c}
-                  title="1.25"
-                  onPress={() => setPonto2(ponto2 + 1.25)}
-                />
-              </View>
-              <View style={styles.btns}>
-                <Button
-                  color={cor3c}
-                  title="1.5"
-                  onPress={() => setPonto2(ponto2 + 1.5)}
-                />
-              </View>
-            </View>
-            <View style={styles.rows}>
-              <View style={styles.btns}>
-                <Button
-                  color={cor3d}
-                  title="1.75"
-                  onPress={() => setPonto2(ponto2 + 1.75)}
-                />
-              </View>
-              <View style={styles.btns}>
-                <Button
-                  color={cor3d}
-                  title="2.0"
-                  onPress={() => setPonto2(ponto2 + 2.0)}
-                />
-              </View>
-            </View>
-            <View style={styles.rows}>
-              <View style={styles.btns}>
-                <Button
-                  color={cor3e}
-                  title="2.25"
-                  onPress={() => setPonto2(ponto2 + 2.25)}
-                />
-              </View>
-              <View style={styles.btns}>
-                <Button
-                  color={cor3e}
-                  title="2.5"
-                  onPress={() => setPonto2(ponto2 + 2.5)}
-                />
-              </View>
-            </View>
-            <View style={styles.rows}>
-              <View style={styles.btns}>
-                <Button
-                  color={cor3f}
-                  title="2.75"
-                  onPress={() => setPonto2(ponto2 + 2.75)}
-                />
-              </View>
-              <View style={styles.btns}>
-                <Button
-                  color={cor3f}
-                  title="3.0"
-                  onPress={() => setPonto2(ponto2 + 3.0)}
-                />
-              </View>
-            </View>
-            <View style={styles.rows}>
-              <View style={styles.btns}>
-                <Button
-                  color={cor3g}
-                  title="3.25"
-                  onPress={() => setPonto2(ponto2 + 3.25)}
-                />
-              </View>
-              <View style={styles.btns}>
-                <Button
-                  color={cor3g}
-                  title="3.5"
-                  onPress={() => setPonto2(ponto2 + 3.5)}
-                />
-              </View>
-            </View>
-            <View style={styles.rows}>
-              <View style={styles.btns}>
-                <Button
-                  color={cor3h}
-                  title="3.75"
-                  onPress={() => setPonto2(ponto2 + 3.75)}
-                />
-              </View>
-              <View style={styles.btns}>
-                <Button
-                  color={cor3h}
-                  title="4.0"
-                  onPress={() => setPonto2(ponto2 + 4.0)}
-                />
-              </View>
-            </View>
-            <View style={styles.rowsErr}>
-              <Text style={styles.errContagem1}>{execucao2}</Text>
-              <TouchableOpacity
-                style={styles.btnsPenalidade}
-                onPress={() => ex2()}
-              >
-                <Text
-                  style={{
-                    backgroundColor: cor3i,
-                    color: "white",
-                    fontSize: 12,
-                    textAlign: "center",
-                    padding: 3,
-                    height: 40,
+                  title="0.5"
+                  onPress={() => {
+                    handleSave();
+                    setPonto2(ponto2 + 0.5);
                   }}
-                >
-                  ERRO DE EXECUÇÃO
-                </Text>
-              </TouchableOpacity>
+                />
+              </View>
+            </View>
+            <View style={styles.rows}>
+              <View style={styles.btns}>
+                <Button
+                  color={cor3c}
+                  title="1.75"
+                  onPress={() => {
+                    handleSave();
+                    setPonto2(ponto2 + 0.75);
+                  }}
+                />
+              </View>
+              <View style={styles.btns}>
+                <Button
+                  color={cor3c}
+                  title="1.0"
+                  onPress={() => {
+                    handleSave();
+                    setPonto2(ponto2 + 1.0);
+                  }}
+                />
+              </View>
+            </View>
+            <View style={styles.rows}>
+              <View style={styles.btns}>
+                <Button
+                  color={cor3d}
+                  title="1.25"
+                  onPress={() => {
+                    handleSave();
+                    setPonto2(ponto2 + 1.25);
+                  }}
+                />
+              </View>
+              <View style={styles.btns}>
+                <Button
+                  color={cor3d}
+                  title="1.5"
+                  onPress={() => {
+                    handleSave();
+                    setPonto2(ponto2 + 1.5);
+                  }}
+                />
+              </View>
+            </View>
+            <View style={styles.rows}>
+              <View style={styles.btns}>
+                <Button
+                  color={cor3e}
+                  title="1.75"
+                  onPress={() => {
+                    handleSave();
+                    setPonto2(ponto2 + 1.75);
+                  }}
+                />
+              </View>
+              <View style={styles.btns}>
+                <Button
+                  color={cor3e}
+                  title="2.0"
+                  onPress={() => {
+                    handleSave();
+                    setPonto2(ponto2 + 2.0);
+                  }}
+                />
+              </View>
+            </View>
+            <View style={styles.rows}>
+              <View style={styles.btns}>
+                <Button
+                  color={cor3f}
+                  title="2.25"
+                  onPress={() => {
+                    handleSave();
+                    setPonto2(ponto2 + 2.25);
+                  }}
+                />
+              </View>
+              <View style={styles.btns}>
+                <Button
+                  color={cor3f}
+                  title="2.5"
+                  onPress={() => {
+                    handleSave();
+                    setPonto2(ponto2 + 2.5);
+                  }}
+                />
+              </View>
+            </View>
+            <View style={styles.rows}>
+              <View style={styles.btns}>
+                <Button
+                  color={cor3g}
+                  title="2.75"
+                  onPress={() => {
+                    handleSave();
+                    setPonto2(ponto2 + 2.75);
+                  }}
+                />
+              </View>
+              <View style={styles.btns}>
+                <Button
+                  color={cor3g}
+                  title="3.0"
+                  onPress={() => {
+                    handleSave();
+                    setPonto2(ponto2 + 3.0);
+                  }}
+                />
+              </View>
+            </View>
+            <View style={styles.rows}>
+              <View style={styles.btns}>
+                <Button
+                  color={cor3h}
+                  title="3.25"
+                  onPress={() => {
+                    handleSave();
+                    setPonto2(ponto2 + 3.25);
+                  }}
+                />
+              </View>
+              <View style={styles.btns}>
+                <Button
+                  color={cor3h}
+                  title="3.5"
+                  onPress={() => {
+                    handleSave();
+                    setPonto2(ponto2 + 3.5);
+                  }}
+                />
+              </View>
+            </View>
+            <View style={styles.rows}>
+              <View style={styles.btns}>
+                <Button
+                  color={cor3i}
+                  title="3.75"
+                  onPress={() => {
+                    handleSave();
+                    setPonto2(ponto2 + 3.75);
+                  }}
+                />
+              </View>
+              <View style={styles.btns}>
+                <Button
+                  color={cor3i}
+                  title="4.0"
+                  onPress={() => {
+                    handleSave();
+                    setPonto2(ponto2 + 4.0);
+                  }}
+                />
+              </View>
             </View>
 
             <View style={styles.rowsErr}>
-              <Text style={styles.errContagem1}>{conclusao2}</Text>
               <TouchableOpacity
                 style={styles.btnsPenalidade}
-                onPress={() => conc2()}
+                onPress={() => {
+                  handleSave();
+                  ex2();
+                }}
               >
                 <Text
                   style={{
@@ -729,28 +833,37 @@ export default function Ferramenta() {
                     height: 40,
                   }}
                 >
+                  ERRO DE EXECUÇÃO
+                </Text>
+              </TouchableOpacity>
+              <Text style={styles.errContagem1}>{execucao2}</Text>
+            </View>
+
+            <View style={styles.rowsErr}>
+              <TouchableOpacity
+                style={styles.btnsPenalidade}
+                onPress={() => {
+                  handleSave();
+                  conc2();
+                }}
+              >
+                <Text
+                  style={{
+                    backgroundColor: cor3k,
+                    color: "white",
+                    fontSize: 12,
+                    textAlign: "center",
+                    padding: 3,
+                    height: 40,
+                  }}
+                >
                   ERRO DE CONCLUSÃO
                 </Text>
               </TouchableOpacity>
-            </View>
-
-            <View style={styles.rows}>
-              <View style={styles.btns}>
-                <Button
-                  color={cor3k}
-                  title="-0.50"
-                  onPress={() => setPonto2(ponto2 - 0.5)}
-                />
-              </View>
-              <View style={styles.btns}>
-                <Button
-                  color={cor3k}
-                  title="-0.25"
-                  onPress={() => setPonto2(ponto2 - 0.25)}
-                />
-              </View>
+              <Text style={styles.errContagem1}>{conclusao2}</Text>
             </View>
           </View>
+          
         </View>
 
         <View style={styles.parte4}>
@@ -870,7 +983,7 @@ export default function Ferramenta() {
                       <View style={styles.pontosB}>
                         <View style={styles.pontoB}>
                           <Text>Pontos:</Text>
-                          <Text style={styles.p}>{item.ponto1}</Text>
+                          <Text style={styles.p}>{item.ponto2}</Text>
                         </View>
                         <View style={styles.pontoB}>
                           <Text>Err Ex:</Text>
