@@ -22,7 +22,7 @@ export default function Routes() {
         >
             <Stack.Navigator
                 screenOptions={{ headerShown: false }}
-                initialRouteName='Interditado'>
+                initialRouteName='Login'>
                     
                 <Stack.Screen  name="Login" component={Login} />
                 <Stack.Screen  name="Interditado" component={Interditado} />
