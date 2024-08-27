@@ -1,9 +1,9 @@
-import { StyleSheet, View, Text, Image, TouchableOpacity } from "react-native";
+import { StyleSheet, View, Text, Image, TouchableOpacity, Linking } from "react-native";
 import { corFundo } from "../colors";
 
 const Interditado = () => {
   const handlePressWhatsApp = () => {
-    const whatsappUrl = 'https://wa.me/5511976047647'; // Substitua pelo seu número de telefone
+    const whatsappUrl = 'https://wa.me/5511976047647?text=Olá,%20vim%20do%20App%20*Sjurados*%20e%20gostaria%20de%20saber%20como%20faço%20para%20criar%20uma%20conta!'; // Substitua pelo seu número de telefone
     Linking.openURL(whatsappUrl).catch((err) => console.error("Couldn't load page", err));
   };
   return (
@@ -13,11 +13,15 @@ const Interditado = () => {
       </View>
       <View style={styles.box}>
         <Text style={styles.exclamation}>!</Text>
-        <Text style={styles.text}>Cadastro automático temporariamente indisponível {'\n'} Me chame no watsapp para mais informações:</Text>
-        <TouchableOpacity onPress={handlePressWhatsApp} style={styles.button}>
-        <Text style={styles.text}>Abrir WhatsApp</Text>
-      </TouchableOpacity>
+        <Text style={styles.text}>Cadastro automático temporariamente indisponível, fale com o desenvolvedor para mais informações:</Text>
+        
       </View>
+      <Text style={styles.text2} onPress={() => navigation.navigate("Login")}>
+        Voltar ao Login
+      </Text>
+      <TouchableOpacity onPress={handlePressWhatsApp} style={styles.button}>
+        <Text style={styles.text}>Chamar No Watsapp</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -45,7 +49,7 @@ const styles = StyleSheet.create({
   },
   text: {
     textAlign: "center",
-    fontSize: 17,
+    fontSize: 16,
     fontWeight: "bold",
   },
   text2: {
@@ -64,6 +68,11 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 5,
+  },
+  text2:{
+    padding: 10,
+    color: "white",
+    fontSize: 17
   }
 });
 
