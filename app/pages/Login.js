@@ -103,10 +103,10 @@ const Login = () => {
       <Text style={styles.text} onPress={() => navigation.navigate("Reset")}>
         Esqueceu sua senha?
       </Text>
-      <Text style={styles.text} onPress={() => navigation.navigate("Cadastro")}>
+      {/* <Text style={styles.text} onPress={() => navigation.navigate("interditado")}>
         Ainda não tem uma conta?
-      </Text>
-
+      </Text> */}
+      
       <Text style={styles.copy}>
         © 2024 BatalhaDoS. Todos os direitos reservados.
       </Text>
