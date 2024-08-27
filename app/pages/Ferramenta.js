@@ -34,6 +34,9 @@ import {
   cor3k,
   cor3l,
 } from "../colors";
+import { logout } from '../authService';
+
+
 
 export default function Ferramenta() {
   const navigation = useNavigation();
@@ -216,15 +219,18 @@ export default function Ferramenta() {
     setModalVisible2(false);
   };
 
-  const handleLogout = async () => {
-    try {
-      /* await AsyncStorage.removeItem('loggedIn'); */
-      setModalVisible2(false);
-      navigation.navigate("Login");
-    } catch (error) {
-      console.log(error);
-      Alert.alert(error);
-    }
+  
+  const handleLogout = () => {
+    logout()
+      .then(() => {
+        navigation.reset({
+          index: 0,
+          routes: [{ name: 'Login' }],
+        });
+      })
+      .catch((error) => {
+        console.error("Erro ao deslogar: ", error);
+      });
   };
 
   const [selectedIds, setSelectedIds] = useState([]);
@@ -863,7 +869,6 @@ export default function Ferramenta() {
               <Text style={styles.errContagem1}>{conclusao2}</Text>
             </View>
           </View>
-          
         </View>
 
         <View style={styles.parte4}>
