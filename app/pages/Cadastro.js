@@ -57,7 +57,7 @@ const Reset = () => {
         setPassword("");
         navigation.navigate("Login");
       } catch (error) {
-        Alert.alert("Algo deu errado! " + error);
+        Alert.alert("Erro ao realizar o cadastro:", error.message);
       }
     }
   };
