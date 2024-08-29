@@ -52,8 +52,7 @@ export default function Ferramenta() {
   const [ponto1, setPonto1] = useState(0);
   const [ponto2, setPonto2] = useState(0);
 
-  const set1 = () => {};
-  const set2 = () => {};
+  
 
   const zerar = () => {
     setExecucao1(0);

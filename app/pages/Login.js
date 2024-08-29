@@ -11,7 +11,7 @@ import {
 import { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
-import { signInWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../src/firebaseConection";
 import { corFundo, cor5 } from "../colors";
 
@@ -50,7 +50,7 @@ const Login = () => {
 
       const user = userCredential.user;
 
-      await sendEmailVerification(user);
+     
 
       if (user.emailVerified) {
         await AsyncStorage.setItem("email", email);
@@ -105,7 +105,7 @@ const Login = () => {
       <Text style={styles.text} onPress={() => navigation.navigate("Reset")}>
         Esqueceu sua senha?
       </Text>
-      <Text style={styles.text} onPress={() => navigation.navigate("Interditado")}>
+      <Text style={styles.text} onPress={() => navigation.navigate("Cadastro")}>
         Ainda não tem uma conta?
       </Text>
       
