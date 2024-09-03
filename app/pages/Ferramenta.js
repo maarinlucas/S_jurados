@@ -62,7 +62,6 @@ export default function Ferramenta() {
     setPonto1(0);
     setPonto2(0);
   };
-
   const ex1 = () => {
     setPonto1(ponto1 - 1);
     setExecucao1(execucao1 + 1);
@@ -91,7 +90,6 @@ export default function Ferramenta() {
   const handleSave2 = (i2) => {
     setMc2(i2);
   };
-
   const handleSave = () => {
     handleSave1(inputValue1);
     handleSave2(inputValue2);
@@ -442,7 +440,7 @@ export default function Ferramenta() {
               <View style={styles.btns}>
                 <Button
                   color={cor3c}
-                  title="1.75"
+                  title="0.75"
                   onPress={() => {
                     handleSave();
                     setPonto1(ponto1 + 0.75);
@@ -669,7 +667,7 @@ export default function Ferramenta() {
               <View style={styles.btns}>
                 <Button
                   color={cor3c}
-                  title="1.75"
+                  title="0.75"
                   onPress={() => {
                     handleSave();
                     setPonto2(ponto2 + 0.75);

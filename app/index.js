@@ -22,7 +22,7 @@ export default function Routes() {
     <NavigationContainer independent={true}>
       <Stack.Navigator
         screenOptions={{ headerShown: false }}
-        initialRouteName='Ferramenta'
+        initialRouteName='Login'
       >
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Reset" component={Reset} />
