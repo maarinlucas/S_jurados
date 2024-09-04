@@ -69,7 +69,7 @@ const Reset = () => {
   return (
     <View style={styles.container}>
       <View style={{ width: "100%", display: "flex" }}>
-        <Image style={styles.logoB} source={require("../imagens/logoc.png")} />
+        <Image style={styles.logoB} source={require("../../imagens/logoc.png")} />
       </View>
 
       <Text style={styles.title}>$jurados - Cadastro</Text>

@@ -1,5 +1,5 @@
 import { StyleSheet, View, Text, Image, TouchableOpacity, Linking } from "react-native";
-import { corFundo } from "../colors";
+import { corFundo } from "./colors";
 import { useNavigation } from "@react-navigation/native";
 
 const Interditado = () => {

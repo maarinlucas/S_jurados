@@ -1,15 +1,14 @@
 import "react-native-gesture-handler";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import React, { useState, useEffect } from "react";
 
 
 
-import Ferramenta from "./pages/Ferramenta";
-import Login from "./pages/Login";
+import Ferramenta from "./pages/ferramenta/Ferramenta";
+import Login from "./pages/autenticacao/Login";
 import Interditado from "./pages/interditado";
-import Reset from "./pages/Reset";
-import Cadastro from "./pages/Cadastro";
+import Reset from "./pages/autenticacao/Reset";
+import Cadastro from "./pages/autenticacao/Cadastro";
 
 /* const [loading, setLoading] = useState(true);
 const [initialRoute, setInitialRoute] = useState("Login"); */

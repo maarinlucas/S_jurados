@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -289,7 +289,7 @@ export default function Ferramenta() {
               <TouchableOpacity onPress={closeModal2}>
                 <Image
                   style={styles.closeC}
-                  source={require("../imagens/cross.png")}
+                  source={require("../../imagens/cross.png")}
                 />
               </TouchableOpacity>
 
@@ -361,7 +361,7 @@ export default function Ferramenta() {
             <TouchableOpacity onPress={openModal2} style={styles.vOpen}>
               <Image
                 style={styles.open}
-                source={require("../imagens/burguer.png")}
+                source={require("../../imagens/burguer.png")}
               />
             </TouchableOpacity>
             <View style={styles.btnSave}>
@@ -922,7 +922,7 @@ export default function Ferramenta() {
                           width: 26,
                           height: 26,
                         }}
-                        source={require("../imagens/cross.png")}
+                        source={require("../../imagens/cross.png")}
                       />
                     </TouchableOpacity>
                     <Text
@@ -1003,7 +1003,7 @@ export default function Ferramenta() {
                       <View style={{ width: "100%", display: "flex" }}>
                         <Image
                           style={styles.logoB}
-                          source={require("../imagens/logoc.png")}
+                          source={require("../../imagens/logoc.png")}
                         />
                       </View>
                     </View>
