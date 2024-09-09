@@ -105,7 +105,7 @@ const Login = () => {
       <Text style={styles.text} onPress={() => navigation.navigate("Reset")}>
         Esqueceu sua senha?
       </Text>
-      <Text style={styles.text} onPress={() => navigation.navigate("Cadastro")}>
+      <Text style={styles.text} onPress={() => navigation.navigate("Interditado")}>
         Ainda não tem uma conta?
       </Text>
       
