@@ -5,7 +5,7 @@ import {
   Text,
   TextInput,
   Alert,
-  Image
+  Image,
 } from "react-native";
 import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
@@ -13,9 +13,11 @@ import { corFundo, cor5 } from "../colors";
 import { auth, db } from "../../src/firebaseConection";
 import { ref, set } from "firebase/database";
 import {
-    createUserWithEmailAndPassword,
-    sendEmailVerification,
-  } from "firebase/auth";
+  createUserWithEmailAndPassword,
+  sendEmailVerification,
+} from "firebase/auth";
+
+// Adicione as credenciais
 
 
 const Reset = () => {
@@ -29,9 +31,9 @@ const Reset = () => {
 
   const handleResetPassword = async () => {
     if (password != password2) {
-        Alert.alert("As senhas não coincidem!");
+      Alert.alert("As senhas não coincidem!");
     } else if (email == "" || name == "" || number == "" || password == "") {
-        Alert.alert("Por favor, preencha todos os campos para se registrar!");
+      Alert.alert("Por favor, preencha todos os campos para se registrar!");
     } else {
       try {
         const userCredential = await createUserWithEmailAndPassword(
@@ -62,14 +64,13 @@ const Reset = () => {
     }
   };
 
-
-
-  
-
   return (
     <View style={styles.container}>
       <View style={{ width: "100%", display: "flex" }}>
-        <Image style={styles.logoB} source={require("../../imagens/logoc.png")} />
+        <Image
+          style={styles.logoB}
+          source={require("../../imagens/logoc.png")}
+        />
       </View>
 
       <Text style={styles.title}>$jurados - Cadastro</Text>

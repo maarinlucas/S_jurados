@@ -10,6 +10,7 @@ import Interditado from "./pages/interditado";
 import Reset from "./pages/autenticacao/Reset";
 import Cadastro from "./pages/autenticacao/Cadastro";
 
+
 /* const [loading, setLoading] = useState(true);
 const [initialRoute, setInitialRoute] = useState("Login"); */
 

@@ -431,7 +431,7 @@ export default function Ferramenta() {
                   title="0.5"
                   onPress={() => {
                     handleSave();
-                    setPonto1(ponto1 + 0.5);
+                    setPonto1(ponto1 + 0.50);
                   }}
                 />
               </View>
@@ -648,7 +648,7 @@ export default function Ferramenta() {
                   title="0.25"
                   onPress={() => {
                     handleSave();
-                    setPonto1(ponto2 + 0.25);
+                    setPonto2(ponto2 + 0.25);
                   }}
                 />
               </View>
