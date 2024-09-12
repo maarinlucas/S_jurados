@@ -34,9 +34,7 @@ import {
   cor3k,
   cor3l,
 } from "../colors";
-import { logout } from '../authService';
-
-
+import { logout } from "../authService";
 
 export default function Ferramenta() {
   const navigation = useNavigation();
@@ -51,8 +49,6 @@ export default function Ferramenta() {
   const [execucao2, setExecucao2] = useState(0);
   const [ponto1, setPonto1] = useState(0);
   const [ponto2, setPonto2] = useState(0);
-
-  
 
   const zerar = () => {
     setExecucao1(0);
@@ -216,13 +212,12 @@ export default function Ferramenta() {
     setModalVisible2(false);
   };
 
-  
   const handleLogout = () => {
     logout()
       .then(() => {
         navigation.reset({
           index: 0,
-          routes: [{ name: 'Login' }],
+          routes: [{ name: "Login" }],
         });
       })
       .catch((error) => {
@@ -431,7 +426,7 @@ export default function Ferramenta() {
                   title="0.5"
                   onPress={() => {
                     handleSave();
-                    setPonto1(ponto1 + 0.50);
+                    setPonto1(ponto1 + 0.5);
                   }}
                 />
               </View>
@@ -878,7 +873,14 @@ export default function Ferramenta() {
           <View style={styles.container2}>
             <View style={styles.logoBtnB}>
               <View style={styles.btnB}>
-                <Button color={cor3b} title="Voltar" onPress={closeModal1} />
+                <Button
+                  color={cor3b}
+                  title="Voltar"
+                  onPress={() => {
+                    closeModal1();
+                    closeModal2();
+                  }}
+                />
 
                 <Button
                   color={cor3b}
