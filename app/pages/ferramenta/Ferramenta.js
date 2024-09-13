@@ -269,7 +269,7 @@ export default function Ferramenta() {
       ]
     );
   };
-  const slideAnim = useRef(new Animated.Value(-500)).current; // Inicialmente, fora da tela
+  
 
   return (
     <ScrollView
