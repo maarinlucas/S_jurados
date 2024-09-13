@@ -278,7 +278,7 @@ export default function Ferramenta() {
       keyboardDismissMode="on-drag"
     >
       <View style={styles.container}>
-        <Modal visible={modalVisible2}>
+        <Modal animationType="fade" visible={modalVisible2}>
           <SafeAreaView style={styles.container3}>
             <View style={styles.contentC}>
               <TouchableOpacity onPress={closeModal2}>
