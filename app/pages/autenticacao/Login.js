@@ -22,7 +22,7 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState("");
   const navigation = useNavigation();
 
-  useEffect(() => {
+  /* useEffect(() => {
     // Carregar e-mail e senha armazenados ao inicializar o componente
     const loadCredentials = async () => {
       try {
@@ -38,11 +38,21 @@ const Login = () => {
     };
 
     loadCredentials();
-  }, []);
+  }, []); */
   const offlineEmail = "email2024";
   const offlineSenha = "senha2024";
 
-  const handleLogin = async () => {
+
+const handleLogin = () => {
+  if(email == offlineEmail && password == offlineSenha){
+    Alert.alert("Offline login realizado com sucesso!");
+    navigation.navigate("Ferramenta");
+  }else{
+    Alert.alert("Por favor, verifique seu e-mail antes de fazer login.");
+  }
+}
+  
+  /* const handleLogin = async () => {
     if (email == offlineEmail && password == offlineSenha) {
       Alert.alert("Offline login realizado com sucesso!");
       navigation.navigate("Ferramenta");
@@ -109,7 +119,7 @@ const Login = () => {
       }
     }
   };
-
+ */
   if (isLoading) {
     return (
       <View style={styles.container}>
