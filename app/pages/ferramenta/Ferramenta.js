@@ -1041,8 +1041,7 @@ export default function Ferramenta() {
 const styles = StyleSheet.create({
   scroll: {
     paddingHorizontal: 30,
-    paddingVertical: 30,
-    paddingTop: 45,
+    paddingVertical: '16%',
     backgroundColor: corFundo,
     height: "100%",
     width: "100%",
@@ -1332,14 +1331,17 @@ const styles = StyleSheet.create({
   },
   container3: {
     width: "100%",
-    flex: 1,
+    height: '100%',
     backgroundColor: corFundo,
   },
   contentC: {
     backgroundColor: corFundo,
-    padding: 33,
     height: "100%",
     width: "100%",
+    paddingHorizontal: 30,
+    paddingVertical: '9%',
+    display: "flex",
+    rowGap: 10,
   },
   opacitC: {
     flex: 1,
