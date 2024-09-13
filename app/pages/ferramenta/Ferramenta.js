@@ -12,7 +12,6 @@ import {
   Modal,
   SafeAreaView,
   ScrollView,
-  BackHandler,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -270,6 +269,7 @@ export default function Ferramenta() {
       ]
     );
   };
+  const slideAnim = useRef(new Animated.Value(-500)).current; // Inicialmente, fora da tela
 
   return (
     <ScrollView
@@ -278,7 +278,7 @@ export default function Ferramenta() {
       keyboardDismissMode="on-drag"
     >
       <View style={styles.container}>
-        <Modal animationType="fade" visible={modalVisible2}>
+        <Modal animationType="fade"  visible={modalVisible2}>
           <SafeAreaView style={styles.container3}>
             <View style={styles.contentC}>
               <TouchableOpacity onPress={closeModal2}>
