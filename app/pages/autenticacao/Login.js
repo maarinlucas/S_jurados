@@ -42,21 +42,16 @@ const Login = () => {
   const offlineEmail = "email2024";
   const offlineSenha = "senha2024";
 
-
-const handleLogin = () => {
-  if(email == offlineEmail && password == offlineSenha){
-    Alert.alert("Offline login realizado com sucesso!");
-    navigation.navigate("Ferramenta");
-  }else{
-    Alert.alert("Por favor, verifique seu e-mail antes de fazer login.");
-  }
-}
-  
-  /* const handleLogin = async () => {
+ /*  const handleLogin = () => {
     if (email == offlineEmail && password == offlineSenha) {
       Alert.alert("Offline login realizado com sucesso!");
       navigation.navigate("Ferramenta");
     } else {
+      Alert.alert("Por favor, verifique seu e-mail antes de fazer login.");
+    }
+  }; */
+
+  const handleLogin = async () => {
       try {
         const userCredential = await signInWithEmailAndPassword(
           auth,
@@ -117,9 +112,9 @@ const handleLogin = () => {
           );
         }
       }
-    }
+    
   };
- */
+
   if (isLoading) {
     return (
       <View style={styles.container}>

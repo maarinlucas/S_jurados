@@ -19,7 +19,6 @@ import {
 
 // Adicione as credenciais
 
-
 const Reset = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -114,7 +113,15 @@ const Reset = () => {
       <View style={styles.btn}>
         <Button color={cor5} title="Cadastrar" onPress={handleResetPassword} />
       </View>
-      <Text style={styles.text} onPress={() => navigation.navigate("Login")}>
+      <Text
+        style={styles.text}
+        onPress={() => {
+          navigation.reset({
+            index: 0,
+            routes: [{ name: "/login" }],
+          });
+        }}
+      >
         Voltar ao Login
       </Text>
       <Text style={styles.copy}>

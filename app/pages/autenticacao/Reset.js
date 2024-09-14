@@ -24,7 +24,10 @@ const Reset = () => {
     resetPassword(email)
       .then(() => {
         Alert.alert("Verifique seu e-mail para redefinir sua senha.");
-        navigation.navigate('Login');
+        navigation.reset({
+          index: 0,
+          routes: [{ name: "Login" }],
+        });
       })
       .catch(error => Alert.alert("Erro ao redefinir senha", error.message));
   };

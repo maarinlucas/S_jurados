@@ -4,26 +4,26 @@ import { useNavigation } from "@react-navigation/native";
 
 const Interditado = () => {
   const navigation = useNavigation();
-  
-  const handlePressWhatsApp = () => {
-    const whatsappUrl = 'https://wa.me/5511976047647?text=Olá,%20vim%20do%20App%20*Sjurados*%20e%20gostaria%20de%20saber%20como%20faço%20para%20criar%20uma%20conta!'; // Substitua pelo seu número de telefone
-    Linking.openURL(whatsappUrl).catch((err) => console.error("Couldn't load page", err));
+
+  const handleCheckout = () => {
+    const checkoutUrl = 'http://localhost:3000/'; // URL do seu checkout hospedado
+    Linking.openURL(checkoutUrl).catch((err) => console.error("Couldn't load page", err));
   };
+
   return (
     <View style={styles.container}>
       <View style={{ width: 50, display: "flex", alignItems: "center" }}>
-      <Image style={styles.logoB} source={require("../imagens/logoc.png")} />
+        <Image style={styles.logoB} source={require("../imagens/logoc.png")} />
       </View>
       <View style={styles.box}>
         <Text style={styles.exclamation}>!</Text>
-        <Text style={styles.text}>Cadastro automático temporariamente indisponível, fale com o desenvolvedor para mais informações:</Text>
-        
+        <Text style={styles.text}>Clicando no botão abaixo você será redirecionado à página de checkout. Após concluir o pagamento, será possível se cadastrar.</Text>
       </View>
       <Text style={styles.text2} onPress={() => navigation.navigate("Login")}>
         Voltar ao Login
       </Text>
-      <TouchableOpacity onPress={handlePressWhatsApp} style={styles.button}>
-        <Text style={styles.text}>Chamar No Watsapp</Text>
+      <TouchableOpacity onPress={handleCheckout} style={styles.button}>
+        <Text style={styles.text}>Página de checkout</Text>
       </TouchableOpacity>
     </View>
   );
@@ -72,10 +72,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     borderRadius: 5,
   },
-  text2:{
+  textButton: {
     padding: 10,
     color: "white",
-    fontSize: 17
+    fontSize: 17,
   },
   logoB: {
     width: 100,
