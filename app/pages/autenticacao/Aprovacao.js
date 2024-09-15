@@ -12,7 +12,7 @@ import {
   import { corFundo, cor5 } from "../colors";
   import { db } from "../../src/firebaseConection";
   import { ref, set } from "firebase/database";
-  import * as Device from 'expo-device'; // Adicione essa importação para obter o identificador do dispositivo
+  /* import * as Device from 'expo-device';  */// Adicione essa importação para obter o identificador do dispositivo
   import { format } from 'date-fns'; // Adicione esta importação para formatar a data e hora
   
   const Aprovacao = () => {
@@ -33,7 +33,7 @@ import {
         Alert.alert("a senha deve conter pelo menos 6 caracteres.");
       } else {
         try {
-          const deviceId = Device.osBuildId; // Obtém o identificador do dispositivo
+         /*  const deviceId = Device.osBuildId; */ // Obtém o identificador do dispositivo
           const now = new Date();
           const formattedDate = format(now, 'yyyy-MM-dd HH:mm:ss'); // Formata a data e hora
   
@@ -44,7 +44,7 @@ import {
             celular: number,
             senha: password,
             dataCadastro: formattedDate,
-            identificadorDispositivo: deviceId,
+            /* identificadorDispositivo: deviceId, */
           });
   
           Alert.alert("Solicitação enviada...");
