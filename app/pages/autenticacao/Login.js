@@ -33,7 +33,7 @@ const Login = () => {
         Alert.alert("Erro", "Parece que o WhatsApp não está instalado no seu dispositivo.");
       });
   };
-  /* useEffect(() => {
+  useEffect(() => {
     // Carregar e-mail e senha armazenados ao inicializar o componente
     const loadCredentials = async () => {
       try {
@@ -49,7 +49,7 @@ const Login = () => {
     };
 
     loadCredentials();
-  }, []); */
+  }, []);
   const offlineEmail = "email2024";
   const offlineSenha = "senha2024";
 
