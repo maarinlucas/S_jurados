@@ -30,10 +30,10 @@ const Login = () => {
       message
     )}`;
 
-    /* Linking.openURL(url)
+    Linking.openURL(url)
       .catch(() => {
         Alert.alert("Erro", "Parece que o WhatsApp não está instalado no seu dispositivo.");
-      }); */
+      });
   };
   useEffect(() => {
     // Carregar e-mail e senha armazenados ao inicializar o componente
