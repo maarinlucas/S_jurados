@@ -6,7 +6,7 @@ const Interditado = () => {
   const navigation = useNavigation();
 
   const handleCheckout = () => {
-    const checkoutUrl = 'http://localhost:3000/'; // URL do seu checkout hospedado
+    const checkoutUrl = 'https://scheckout997eb.42web.io/?i=1'; // URL do seu checkout hospedado
     Linking.openURL(checkoutUrl).catch((err) => console.error("Couldn't load page", err));
   };
 
@@ -17,13 +17,13 @@ const Interditado = () => {
       </View>
       <View style={styles.box}>
         <Text style={styles.exclamation}>!</Text>
-        <Text style={styles.text}>Clicando no botão abaixo você será redirecionado à página de checkout. Após concluir o pagamento, será possível se cadastrar.</Text>
+        <Text style={styles.text}>Cdastro automatico temporariamente desativado, clique no botão para ser direcionado a um link de solicitação de cadastro.</Text>
       </View>
       <Text style={styles.text2} onPress={() => navigation.navigate("Login")}>
         Voltar ao Login
       </Text>
       <TouchableOpacity onPress={handleCheckout} style={styles.button}>
-        <Text style={styles.text}>Página de checkout</Text>
+        <Text style={styles.text}>Página de cadastro</Text>
       </TouchableOpacity>
     </View>
   );
