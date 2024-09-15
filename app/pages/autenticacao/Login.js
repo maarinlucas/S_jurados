@@ -25,7 +25,7 @@ const Login = () => {
 
   const handleSupport = () => {
     const phoneNumber = "5511976047647"; // Número de WhatsApp com o código do país (55 para o Brasil)
-    const message = "Olá, vim do app, gostaria de ajuda com a plataforma!";
+    const message = "Vim do Sjurados, gostaria de ajuda com a plataforma!";
     const url = `whatsapp://send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`;
 
     Linking.openURL(url)
@@ -179,7 +179,7 @@ const Login = () => {
       </Text>
       <Text
         style={styles.text}
-        onPress={() => {  Alert.alert("Aviso", "O Sjurados está na sua versão beta, logo, os cadastros ainda estão sendo feitos manualmente, por favor solicite o cadastro no formulário a seguir e aguarde o retorno do suporte, grato pela compreenção.");navigation.navigate("Aprovacao")}}
+        onPress={() => {  Alert.alert("O Sjurados está na versão beta, os cadastrosz");navigation.navigate("Aprovacao")}}
       >
         Ainda não tem uma conta?
       </Text>

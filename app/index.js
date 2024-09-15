@@ -42,13 +42,13 @@ export default function Routes() {
         initialRouteName='Login'
       >
         <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="Reset" component={Reset} />
-        <Stack.Screen name="Interditado" component={Interditado} />
+       {/*  <Stack.Screen name="Reset" component={Reset} /> */}
+       {/*  <Stack.Screen name="Interditado" component={Interditado} /> */}
         <Stack.Screen name="Ferramenta" component={Ferramenta} />
-        <Stack.Screen name="Cadastro" component={Cadastro} />
+        {/* <Stack.Screen name="Cadastro" component={Cadastro} /> */}
         <Stack.Screen name="Successo" component={Successo} />
         <Stack.Screen name="Aprovacao" component={Aprovacao} />
-        
+
       </Stack.Navigator>
     </NavigationContainer>
   );
