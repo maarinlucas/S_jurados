@@ -59,8 +59,14 @@ const Login = () => {
           password
         );
         const user = userCredential.user;
+        
+        await AsyncStorage.setItem("email", email);
+        await AsyncStorage.setItem("password", password);
 
-        if (user.emailVerified) {
+        Alert.alert("Login realizado com sucesso!");
+        navigation.navigate("Ferramenta");
+
+      /*   if (user.emailVerified) {
           // Armazena email e senha no AsyncStorage
           await AsyncStorage.setItem("email", email);
           await AsyncStorage.setItem("password", password);
@@ -71,7 +77,7 @@ const Login = () => {
           // Se o email não estiver verificado, desloga o usuário
           await auth.signOut();
           Alert.alert("Por favor, verifique seu e-mail antes de fazer login.");
-        }
+        } */
       } catch (error) {
         if (error instanceof FirebaseError) {
           let errorMessage;
