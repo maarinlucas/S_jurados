@@ -28,10 +28,10 @@ const Login = () => {
     const message = "Vim do Sjurados, gostaria de ajuda com a plataforma!";
     const url = `whatsapp://send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`;
 
-    Linking.openURL(url)
+    /* Linking.openURL(url)
       .catch(() => {
         Alert.alert("Erro", "Parece que o WhatsApp não está instalado no seu dispositivo.");
-      });
+      }); */
   };
   useEffect(() => {
     // Carregar e-mail e senha armazenados ao inicializar o componente
@@ -179,7 +179,7 @@ const Login = () => {
       </Text>
       <Text
         style={styles.text}
-        onPress={() => {  Alert.alert("O Sjurados está na versão beta, os cadastrosz");navigation.navigate("Aprovacao")}}
+        onPress={() => {  Alert.alert("Aviso","O Sjurados se encontra em sua versão beta, por isso os cadastros estão sendo feitos manualmente, solicite seu cadastro no formulário a seguir e aguarde o suporte entrar em contato, grato pela compreesão."); navigation.navigate("Aprovacao")}}
       >
         Ainda não tem uma conta?
       </Text>
