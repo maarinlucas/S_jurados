@@ -1,16 +1,28 @@
-import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { StyleSheet, View, Text, Image, TouchableOpacity, Linking } from "react-native";
+import { corFundo } from "./colors";
 import { useNavigation } from "@react-navigation/native";
 
-const Sucesso = () => {
+const Interditado = () => {
   const navigation = useNavigation();
 
+  const handleCheckout = () => {
+    const checkoutUrl = 'https://scheckout997eb.42web.io/?i=1'; // URL do seu checkout hospedado
+    Linking.openURL(checkoutUrl).catch((err) => console.error("Couldn't load page", err));
+  };
+/* Por favor, aguarde o contato da nossa equipe para a realização do
+pagamento do app para a validação do cadastro, prazo de 24h. */
   return (
     <View style={styles.container}>
-      <Text style={styles.successText}>Pagamento Concluído com Sucesso!</Text>
-      <TouchableOpacity onPress={() => navigation.navigate("Login")} style={styles.button}>
-        <Text style={styles.buttonText}>Voltar ao Início</Text>
-      </TouchableOpacity>
+      <View style={{ width: 50, display: "flex", alignItems: "center" }}>
+        <Image style={styles.logoB} source={require("../imagens/logoc.png")} />
+      </View>
+      <View style={styles.box}>
+        <Text style={styles.exclamation}>!</Text>
+        <Text style={styles.text}>Solicitação de cadastro em andamento... Por favor, aguarde o contato da nossa equipe para a realização do pagamento do app para a validação do cadastro, prazo de 24h.</Text>
+      </View>
+      <Text style={styles.text2} onPress={() => navigation.navigate("Login")}>
+        Voltar ao Login
+      </Text>
     </View>
   );
 };
@@ -18,25 +30,57 @@ const Sucesso = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#fff",
+    justifyContent: "center",
+    padding: 20,
+    backgroundColor: corFundo,
+    display: "flex",
+    rowGap: 20,
   },
-  successText: {
-    fontSize: 24,
+  box: {
+    backgroundColor: "white",
+    borderRadius: 20,
+    color: "black",
+    width: "100%",
+    height: 200,
+    display: "flex",
+    alignItems: "center",
+    flexDirection: "column",
+    padding: 15,
+  },
+  text: {
+    textAlign: "center",
+    fontSize: 15,
     fontWeight: "bold",
-    marginBottom: 20,
+    color: 'green'
+  },
+  text2: {
+    textAlign: "center",
+    fontSize: 19,
+    margin: 5,
+    fontWeight: "bold",
+  },
+
+  exclamation: {
+    fontSize: 40,
+    color: "red",
   },
   button: {
-    backgroundColor: "#25D366",
-    padding: 15,
+    backgroundColor: '#25D366',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
     borderRadius: 5,
   },
-  buttonText: {
-    color: "#fff",
-    fontSize: 16,
-    fontWeight: "bold",
+  textButton: {
+    padding: 10,
+    color: "white",
+    fontSize: 17,
+  },
+  logoB: {
+    width: 100,
+    height: 100,
+    alignSelf: "center",
   },
 });
 
-export default Sucesso;
+export default Interditado;

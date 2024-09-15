@@ -7,6 +7,7 @@ import {
   Alert,
   Image,
   ActivityIndicator,
+  Linking
 } from "react-native";
 import { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -22,6 +23,16 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState("");
   const navigation = useNavigation();
 
+  const handleSupport = () => {
+    const phoneNumber = "5511976047647"; // Número de WhatsApp com o código do país (55 para o Brasil)
+    const message = "Olá, vim do app, gostaria de ajuda com a plataforma!";
+    const url = `whatsapp://send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`;
+
+    Linking.openURL(url)
+      .catch(() => {
+        Alert.alert("Erro", "Parece que o WhatsApp não está instalado no seu dispositivo.");
+      });
+  };
   /* useEffect(() => {
     // Carregar e-mail e senha armazenados ao inicializar o componente
     const loadCredentials = async () => {
@@ -157,16 +168,21 @@ const Login = () => {
       <View style={styles.btn}>
         <Button color={cor5} title="Acessar" onPress={handleLogin} />
       </View>
-      <Text style={styles.text} onPress={() => navigation.navigate("Reset")}>
+      {/* <Text style={styles.text} onPress={() => navigation.navigate("Reset")}>
         Esqueceu sua senha?
+      </Text> */}
+      <Text
+        style={styles.text}
+        onPress={handleSupport} // Chamando a função de suporte ao clicar
+      >
+        Falar com o Suporte
       </Text>
       <Text
         style={styles.text}
-        onPress={() => navigation.navigate("Interditado")}
+        onPress={() => {  Alert.alert("Aviso", "O Sjurados está na sua versão beta, logo, os cadastros ainda estão sendo feitos manualmente, por favor solicite o cadastro no formulário a seguir e aguarde o retorno do suporte, grato pela compreenção.");navigation.navigate("Aprovacao")}}
       >
         Ainda não tem uma conta?
       </Text>
-
       <Text style={styles.copy}>
         © 2024 BatalhaDoS. Todos os direitos reservados.
       </Text>

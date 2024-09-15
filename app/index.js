@@ -10,6 +10,7 @@ import Interditado from "./pages/interditado";
 import Reset from "./pages/autenticacao/Reset";
 import Cadastro from "./pages/autenticacao/Cadastro";
 import Successo from "./pages/Successo";
+import Aprovacao from "./pages/autenticacao/Aprovacao";
 
 
 /* const [loading, setLoading] = useState(true);
@@ -46,6 +47,8 @@ export default function Routes() {
         <Stack.Screen name="Ferramenta" component={Ferramenta} />
         <Stack.Screen name="Cadastro" component={Cadastro} />
         <Stack.Screen name="Successo" component={Successo} />
+        <Stack.Screen name="Aprovacao" component={Aprovacao} />
+        
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -9,7 +9,8 @@ const Interditado = () => {
     const checkoutUrl = 'https://scheckout997eb.42web.io/?i=1'; // URL do seu checkout hospedado
     Linking.openURL(checkoutUrl).catch((err) => console.error("Couldn't load page", err));
   };
-
+/* Por favor, aguarde o contato da nossa equipe para a realização do
+pagamento do app para a validação do cadastro, prazo de 24h. */
   return (
     <View style={styles.container}>
       <View style={{ width: 50, display: "flex", alignItems: "center" }}>
@@ -17,7 +18,7 @@ const Interditado = () => {
       </View>
       <View style={styles.box}>
         <Text style={styles.exclamation}>!</Text>
-        <Text style={styles.text}>Cdastro automatico temporariamente desativado, clique no botão para ser direcionado a um link de solicitação de cadastro.</Text>
+        <Text style={styles.text}>Cadastro automatico temporariamente desativado, clique no botão para ser direcionado a um link de solicitação de cadastro.</Text>
       </View>
       <Text style={styles.text2} onPress={() => navigation.navigate("Login")}>
         Voltar ao Login
