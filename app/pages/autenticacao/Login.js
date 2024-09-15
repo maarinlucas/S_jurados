@@ -7,7 +7,7 @@ import {
   Alert,
   Image,
   ActivityIndicator,
-  Linking
+  Linking,
 } from "react-native";
 import { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -26,7 +26,9 @@ const Login = () => {
   const handleSupport = () => {
     const phoneNumber = "5511976047647"; // Número de WhatsApp com o código do país (55 para o Brasil)
     const message = "Vim do Sjurados, gostaria de ajuda com a plataforma!";
-    const url = `whatsapp://send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`;
+    const url = `whatsapp://send?phone=${phoneNumber}&text=${encodeURIComponent(
+      message
+    )}`;
 
     /* Linking.openURL(url)
       .catch(() => {
@@ -53,7 +55,7 @@ const Login = () => {
   const offlineEmail = "email2024";
   const offlineSenha = "senha2024";
 
- /*  const handleLogin = () => {
+  /*  const handleLogin = () => {
     if (email == offlineEmail && password == offlineSenha) {
       Alert.alert("Offline login realizado com sucesso!");
       navigation.navigate("Ferramenta");
@@ -63,19 +65,19 @@ const Login = () => {
   }; */
 
   const handleLogin = async () => {
-      try {
-        const userCredential = await signInWithEmailAndPassword(
-          auth,
-          email,
-          password
-        );
-        const user = userCredential.user;
-        
-        await AsyncStorage.setItem("email", email);
-        await AsyncStorage.setItem("password", password);
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const user = userCredential.user;
 
-        Alert.alert("Login realizado com sucesso!");
-        navigation.navigate("Ferramenta");
+      await AsyncStorage.setItem("email", email);
+      await AsyncStorage.setItem("password", password);
+
+      Alert.alert("Login realizado com sucesso!");
+      navigation.navigate("Ferramenta");
 
       /*   if (user.emailVerified) {
           // Armazena email e senha no AsyncStorage
@@ -89,47 +91,43 @@ const Login = () => {
           await auth.signOut();
           Alert.alert("Por favor, verifique seu e-mail antes de fazer login.");
         } */
-      } catch (error) {
-        if (error instanceof FirebaseError) {
-          let errorMessage;
+    } catch (error) {
+      if (error instanceof FirebaseError) {
+        let errorMessage;
 
-          switch (error.code) {
-            case "auth/invalid-credential":
-              errorMessage = "A senha e/ou email inseridos não são válidos";
-              break;
-            case "auth/invalid-email":
-              errorMessage = "O e-mail inserido não é válido.";
-              break;
-            case "auth/user-disabled":
-              errorMessage =
-                "Esta conta foi desativada. Entre em contato com o suporte.";
-              break;
-            case "auth/user-not-found":
-              errorMessage = "Nenhuma conta encontrada com este e-mail.";
-              break;
-            case "auth/network-request-failed":
-              errorMessage =
-                "Não foi possível conectar ao servidor. Verifique sua conexão com a internet.";
-              break;
-            case "auth/too-many-requests":
-              errorMessage =
-                "O acesso a esta conta foi temporariamente desativado devido a muitas tentativas de login malsucedidas. Você pode restaurá-lo imediatamente redefinindo sua senha ou tentar novamente mais tarde.";
-              break;
-            default:
-              errorMessage = `Erro inesperado: ${error.message}`; // Mostra a mensagem de erro para depuração
-              break;
-          }
-
-          Alert.alert("Erro ao realizar login", errorMessage);
-        } else {
-          // Caso não seja um erro do Firebase, exibe uma mensagem genérica
-          Alert.alert(
-            "Erro desconhecido",
-            "Não foi possível realizar o login."
-          );
+        switch (error.code) {
+          case "auth/invalid-credential":
+            errorMessage = "A senha e/ou email inseridos não são válidos";
+            break;
+          case "auth/invalid-email":
+            errorMessage = "O e-mail inserido não é válido.";
+            break;
+          case "auth/user-disabled":
+            errorMessage =
+              "Esta conta foi desativada. Entre em contato com o suporte.";
+            break;
+          case "auth/user-not-found":
+            errorMessage = "Nenhuma conta encontrada com este e-mail.";
+            break;
+          case "auth/network-request-failed":
+            errorMessage =
+              "Não foi possível conectar ao servidor. Verifique sua conexão com a internet.";
+            break;
+          case "auth/too-many-requests":
+            errorMessage =
+              "O acesso a esta conta foi temporariamente desativado devido a muitas tentativas de login malsucedidas. Você pode restaurá-lo imediatamente redefinindo sua senha ou tentar novamente mais tarde.";
+            break;
+          default:
+            errorMessage = `Erro inesperado: ${error.message}`; // Mostra a mensagem de erro para depuração
+            break;
         }
+
+        Alert.alert("Erro ao realizar login", errorMessage);
+      } else {
+        // Caso não seja um erro do Firebase, exibe uma mensagem genérica
+        Alert.alert("Erro desconhecido", "Não foi possível realizar o login.");
       }
-    
+    }
   };
 
   if (isLoading) {
@@ -179,7 +177,13 @@ const Login = () => {
       </Text>
       <Text
         style={styles.text}
-        onPress={() => {  Alert.alert("Aviso","O Sjurados se encontra em sua versão beta, por isso os cadastros estão sendo feitos manualmente, solicite seu cadastro no formulário a seguir e aguarde o suporte entrar em contato, grato pela compreesão."); navigation.navigate("Aprovacao")}}
+        onPress={() => {
+          Alert.alert(
+            "Aviso",
+            "O Sjurados se encontra em sua versão beta, por isso os cadastros estão sendo feitos manualmente, solicite seu cadastro no formulário a seguir e aguarde o suporte entrar em contato, grato."
+          );
+          navigation.navigate("Aprovacao");
+        }}
       >
         Ainda não tem uma conta?
       </Text>
