@@ -13,14 +13,37 @@
       "backgroundColor": "#131313"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.maarin_lucas.Sjurados",
+      "associatedDomains": [
+        "applinks:sjurados.com"
+      ]
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#131313"
       },
-      "package": "com.maarin_lucas.Sjurados"
+      "package": "com.maarin_lucas.Sjurados",
+      "intentFilters": [
+        {
+          "action": "VIEW",
+          "data": [
+            {
+              "scheme": "https",
+              "host": "sjurados.com",
+              "pathPrefix": "/"
+            },
+            {
+              "scheme": "sjurados"
+            }
+          ],
+          "category": [
+            "BROWSABLE",
+            "DEFAULT"
+          ]
+        }
+      ]
     },
     "web": {
       "bundler": "metro",

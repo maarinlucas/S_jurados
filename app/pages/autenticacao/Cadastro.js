@@ -6,8 +6,9 @@ import {
   TextInput,
   Alert,
   Image,
+  Linking
 } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { corFundo, cor5 } from "../colors";
 import { auth, db } from "../../src/firebaseConection";
@@ -26,6 +27,31 @@ const Reset = () => {
   const [name, setName] = useState("");
   const [number, setNumber] = useState("");
 
+
+  useEffect(() => {
+    const handleDeepLink = (event) => {
+      const url = event.url;
+      console.log('Deep link recebido:', url);
+      // Faça algo com a URL, por exemplo, navegar para uma tela específica
+    };
+  
+    // Escuta por links recebidos enquanto o app está em execução
+    const subscription = Linking.addEventListener('url', handleDeepLink);
+  
+    // Captura o deep link se o app foi aberto a partir de um link
+    Linking.getInitialURL().then((url) => {
+      if (url) {
+        console.log('App foi iniciado por um deep link:', url);
+        handleDeepLink({ url });
+      }
+    });
+  
+    return () => {
+      subscription.remove();
+    };
+  }, []);
+
+  
   const navigation = useNavigation();
 
   const handleResetPassword = async () => {

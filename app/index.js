@@ -19,35 +19,30 @@ const [initialRoute, setInitialRoute] = useState("Login"); */
 const Stack = createNativeStackNavigator();
 
 
-/* const linking = {
+const linking = {
   prefixes: ["sjurados://"],  // O mesmo scheme definido no app.json
   config: {
     screens: {
-      Ferramenta: "ferramenta",
-      Login: "login",
-      Interditado: "interditado",
-      Reset: "reset",
       Cadastro: "cadastro",
-      Successo: "successo",
     },
   },
-}; */
+};
 
 export default function Routes() {
 
   return (
-    <NavigationContainer independent={true} /* linking={linking} */ >
+    <NavigationContainer independent={true} linking={linking} >
       <Stack.Navigator
         screenOptions={{ headerShown: false }}
         initialRouteName='Login'
       >
         <Stack.Screen name="Login" component={Login} />
-       {/*  <Stack.Screen name="Reset" component={Reset} /> */}
-       {/*  <Stack.Screen name="Interditado" component={Interditado} /> */}
+        <Stack.Screen name="Reset" component={Reset} />
+        {/* <Stack.Screen name="Interditado" component={Interditado} /> */}
         <Stack.Screen name="Ferramenta" component={Ferramenta} />
-        {/* <Stack.Screen name="Cadastro" component={Cadastro} /> */}
+         {/* <Stack.Screen name="Cadastro" component={Cadastro} />  */}
         <Stack.Screen name="Successo" component={Successo} />
-        <Stack.Screen name="Aprovacao" component={Aprovacao} />
+        {/* <Stack.Screen name="Aprovacao" component={Aprovacao} /> */}
 
       </Stack.Navigator>
     </NavigationContainer>

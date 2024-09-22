@@ -23,8 +23,10 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState("");
   const navigation = useNavigation();
 
-  const handleSupport = () => {
-    const phoneNumber = "5511976047647"; // Número de WhatsApp com o código do país (55 para o Brasil)
+  const handleCheckout = () => {
+
+
+    /* const phoneNumber = "5511976047647"; // Número de WhatsApp com o código do país (55 para o Brasil)
     const message = "Vim do Sjurados, gostaria de ajuda com a plataforma!";
     const url = `whatsapp://send?phone=${phoneNumber}&text=${encodeURIComponent(
       message
@@ -33,7 +35,10 @@ const Login = () => {
     Linking.openURL(url)
       .catch(() => {
         Alert.alert("Erro", "Parece que o WhatsApp não está instalado no seu dispositivo.");
-      });
+      }); */
+
+      const checkoutUrl = 'https://checkout-sjurados.onrender.com'; // URL do seu checkout hospedado
+      Linking.openURL(checkoutUrl).catch((err) => console.error("Couldn't load page", err));
   };
   useEffect(() => {
     // Carregar e-mail e senha armazenados ao inicializar o componente
@@ -166,12 +171,12 @@ const Login = () => {
       <View style={styles.btn}>
         <Button color={cor5} title="Acessar" onPress={handleLogin} />
       </View>
-      {/* <Text style={styles.text} onPress={() => navigation.navigate("Reset")}>
+      <Text style={styles.text} onPress={() => navigation.navigate("Reset")}>
         Esqueceu sua senha?
-      </Text> */}
+      </Text>
       <Text
         style={styles.text}
-        onPress={handleSupport} // Chamando a função de suporte ao clicar
+        onPress={() => {navigation.navigate("Successo");}} // Chamando a função de suporte ao clicar
       >
         Falar com o Suporte
       </Text>
@@ -180,9 +185,9 @@ const Login = () => {
         onPress={() => {
           Alert.alert(
             "Aviso",
-            "O Sjurados se encontra em sua versão beta, por isso os cadastros estão sendo feitos manualmente, solicite seu cadastro no formulário a seguir e aguarde o suporte entrar em contato, grato."
+            "Você será redirecionado a um site externo"
           );
-          navigation.navigate("Aprovacao");
+          handleCheckout();
         }}
       >
         Ainda não tem uma conta?

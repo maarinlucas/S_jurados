@@ -6,7 +6,7 @@ const Interditado = () => {
   const navigation = useNavigation();
 
   const handleCheckout = () => {
-    const checkoutUrl = 'https://scheckout997eb.42web.io/?i=1'; // URL do seu checkout hospedado
+    const checkoutUrl = ''; // URL do seu checkout hospedado
     Linking.openURL(checkoutUrl).catch((err) => console.error("Couldn't load page", err));
   };
 /* Por favor, aguarde o contato da nossa equipe para a realização do

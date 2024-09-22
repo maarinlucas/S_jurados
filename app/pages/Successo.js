@@ -18,7 +18,7 @@ pagamento do app para a validação do cadastro, prazo de 24h. */
       </View>
       <View style={styles.box}>
         <Text style={styles.exclamation}>!</Text>
-        <Text style={styles.text}>Solicitação de cadastro em andamento... Por favor, aguarde o contato da nossa equipe para a realização do pagamento do app para a validação do cadastro, prazo de 24h.</Text>
+        <Text style={styles.text}>Entre em contato com o suporte através do e-mail:</Text ><Text style={{color: 'black'}}>batalhadoss94@gmail.com</Text>
       </View>
       <Text style={styles.text2} onPress={() => navigation.navigate("Login")}>
         Voltar ao Login
