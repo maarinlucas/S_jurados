@@ -20,7 +20,7 @@ const Stack = createNativeStackNavigator();
 
 
 const linking = {
-  prefixes: ["sjurados://"],  // O mesmo scheme definido no app.json
+  prefixes: ["sjurados://"],  // Scheme definido no app.json
   config: {
     screens: {
       Cadastro: "cadastro",
@@ -38,9 +38,9 @@ export default function Routes() {
       >
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Reset" component={Reset} />
-        {/* <Stack.Screen name="Interditado" component={Interditado} /> */}
+        <Stack.Screen name="Interditado" component={Interditado} />
         <Stack.Screen name="Ferramenta" component={Ferramenta} />
-         {/* <Stack.Screen name="Cadastro" component={Cadastro} />  */}
+         <Stack.Screen name="Cadastro" component={Cadastro} /> 
         <Stack.Screen name="Successo" component={Successo} />
         {/* <Stack.Screen name="Aprovacao" component={Aprovacao} /> */}
 

@@ -5,7 +5,7 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "sjurados",
+    "scheme": "sjurados",  
     "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./assets/images/splash.png",
@@ -14,7 +14,6 @@
     },
     "ios": {
       "supportsTablet": true
-     
     },
     "android": {
       "adaptiveIcon": {
@@ -24,8 +23,13 @@
       "intentFilters": [
         {
           "action": "VIEW",
-         
-          
+          "data": [
+            {
+              "scheme": "sjurados", 
+              "host": "*",
+              "pathPrefix": "/"
+            }
+          ],
           "category": [
             "BROWSABLE",
             "DEFAULT"
