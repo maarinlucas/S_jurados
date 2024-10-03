@@ -12,6 +12,7 @@ import {
   Modal,
   SafeAreaView,
   ScrollView,
+  ActivityIndicator
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -48,6 +49,8 @@ export default function Ferramenta() {
   const [execucao2, setExecucao2] = useState(0);
   const [ponto1, setPonto1] = useState(0);
   const [ponto2, setPonto2] = useState(0);
+  const [loading, setLoading] = useState(true);
+
 
   const zerar = () => {
     setExecucao1(0);
@@ -94,6 +97,7 @@ export default function Ferramenta() {
 
   useEffect(() => {
     loadItems();
+    setLoading(false);
   }, []);
 
   const loadItems = async () => {
@@ -270,6 +274,19 @@ export default function Ferramenta() {
     );
   };
   
+
+  if (loading) {
+    return (
+      <View style={{ flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: corFundo}}>
+        <ActivityIndicator color="#FFF" size="large" />
+      </View>
+    )
+  }
+
+
 
   return (
     <ScrollView
@@ -1041,10 +1058,9 @@ export default function Ferramenta() {
 const styles = StyleSheet.create({
   scroll: {
     paddingHorizontal: 30,
-    paddingVertical: '16%',
+    paddingVertical: '15%',
     backgroundColor: corFundo,
-    height: "100%",
-    width: "100%",
+    flex: 1
   },
   container: {
     height: "100%",

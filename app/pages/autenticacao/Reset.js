@@ -8,7 +8,7 @@ import {
   Image,
   ActivityIndicator,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { resetPassword } from "../authService";
 import { useNavigation } from "@react-navigation/native";
 import { corFundo, cor5 } from "../colors";
@@ -32,8 +32,21 @@ const Reset = () => {
       .catch(error => Alert.alert("Erro ao redefinir senha", error.message));
   };
 
-  
+  useEffect(() => {
+        setLoading(false);     
+  }, []);
+  const [loading, setLoading] = useState(true);
 
+  if (loading) {
+    return (
+      <View style={{ flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: corFundo}}>
+        <ActivityIndicator color="#FFF" size="large" />
+      </View>
+    )
+  }
 
   return (
     <View style={styles.container}>

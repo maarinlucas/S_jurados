@@ -5,7 +5,7 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "sjurados",  
+    "scheme": "sjurados",
     "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./assets/images/splash.png",
@@ -25,7 +25,7 @@
           "action": "VIEW",
           "data": [
             {
-              "scheme": "sjurados", 
+              "scheme": "sjurados",
               "host": "*",
               "pathPrefix": "/"
             }
@@ -35,7 +35,8 @@
             "DEFAULT"
           ]
         }
-      ]
+      ],
+      "package": "com.maarin_lucas.Sjurados"
     },
     "web": {
       "bundler": "metro",

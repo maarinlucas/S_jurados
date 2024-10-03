@@ -1,6 +1,7 @@
-import { StyleSheet, View, Text, Image, TouchableOpacity, Linking } from "react-native";
+import { StyleSheet, View, Text, Image, TouchableOpacity, Linking, ActivityIndicator } from "react-native";
 import { corFundo } from "./colors";
 import { useNavigation } from "@react-navigation/native";
+import React, { useState, useEffect } from "react";
 
 const Interditado = () => {
   const navigation = useNavigation();
@@ -11,6 +12,25 @@ const Interditado = () => {
   };
 /* Por favor, aguarde o contato da nossa equipe para a realização do
 pagamento do app para a validação do cadastro, prazo de 24h. */
+
+
+
+useEffect(() => {
+  setLoading(false);     
+}, []);
+const [loading, setLoading] = useState(true);
+
+if (loading) {
+return (
+<View style={{ flex: 1,
+  justifyContent: "center",
+  alignItems: "center",
+  backgroundColor: corFundo}}>
+  <ActivityIndicator color="#FFF" size="large" />
+</View>
+)
+}
+
   return (
     <View style={styles.container}>
       <View style={{ width: 50, display: "flex", alignItems: "center" }}>

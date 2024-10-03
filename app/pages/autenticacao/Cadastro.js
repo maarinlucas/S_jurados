@@ -20,37 +20,30 @@ import {
 
 // Adicione as credenciais
 
-const Reset = () => {
+const Cadastro = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
   const [name, setName] = useState("");
   const [number, setNumber] = useState("");
-
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const handleDeepLink = (event) => {
-      const url = event.url;
-      console.log('Deep link recebido:', url);
-      // Faça algo com a URL, por exemplo, navegar para uma tela específica
-    };
-  
-    // Escuta por links recebidos enquanto o app está em execução
-    const subscription = Linking.addEventListener('url', handleDeepLink);
-  
-    // Captura o deep link se o app foi aberto a partir de um link
-    Linking.getInitialURL().then((url) => {
-      if (url) {
-        console.log('App foi iniciado por um deep link:', url);
-        handleDeepLink({ url });
-      }
-    });
-  
-    return () => {
-      subscription.remove();
-    };
+    setLoading(false);   
+   
   }, []);
 
+
+  if (loading) {
+    return (
+      <View style={{ flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: corFundo}}>
+        <ActivityIndicator color="#FFF" size="large" />
+      </View>
+    )
+  }
   
   const navigation = useNavigation();
 
@@ -200,4 +193,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Reset;
+export default Cadastro;

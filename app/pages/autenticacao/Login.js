@@ -20,7 +20,7 @@ import { FirebaseError } from "firebase/app";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isLoading, setIsLoading] = useState("");
+  const [loading, setLoading] = useState(true);
   const navigation = useNavigation();
 
   const handleCheckout = () => {
@@ -51,12 +51,14 @@ const Login = () => {
       } catch (error) {
         console.error(error);
       } finally {
-        setIsLoading(false);
+        setLoading(false);
       }
     };
 
     loadCredentials();
   }, []);
+
+
   const offlineEmail = "email2024";
   const offlineSenha = "senha2024";
 
@@ -84,7 +86,7 @@ const Login = () => {
       Alert.alert("Login realizado com sucesso!");
       navigation.navigate("Ferramenta");
 
-      /*   if (user.emailVerified) {
+        if (user.emailVerified) {
           // Armazena email e senha no AsyncStorage
           await AsyncStorage.setItem("email", email);
           await AsyncStorage.setItem("password", password);
@@ -95,7 +97,7 @@ const Login = () => {
           // Se o email não estiver verificado, desloga o usuário
           await auth.signOut();
           Alert.alert("Por favor, verifique seu e-mail antes de fazer login.");
-        } */
+        }
     } catch (error) {
       if (error instanceof FirebaseError) {
         let errorMessage;
@@ -135,12 +137,12 @@ const Login = () => {
     }
   };
 
-  if (isLoading) {
+ if (loading) {
     return (
       <View style={styles.container}>
-        <ActivityIndicator size="large" />
+        <ActivityIndicator color="#FFF" size="large" />
       </View>
-    );
+    )
   }
 
   return (

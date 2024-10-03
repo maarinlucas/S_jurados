@@ -1,16 +1,38 @@
-import { StyleSheet, View, Text, Image, TouchableOpacity, Linking } from "react-native";
+import { StyleSheet, View, Text, Image, TouchableOpacity, Linking, ActivityIndicator } from "react-native";
+import React, { useState, useEffect } from "react";
 import { corFundo } from "./colors";
 import { useNavigation } from "@react-navigation/native";
 
 const Interditado = () => {
   const navigation = useNavigation();
 
+
+  useEffect(() => {
+    setLoading(false);
+  }, []);
+  const [loading, setLoading] = useState(true);
+
+  if (loading) {
+    return (
+      <View style={{
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: corFundo
+      }}>
+        <ActivityIndicator color="#FFF" size="large" />
+      </View>
+    )
+  }
+
+
+
   const handleCheckout = () => {
     const checkoutUrl = 'https://scheckout997eb.42web.io/?i=1'; // URL do seu checkout hospedado
     Linking.openURL(checkoutUrl).catch((err) => console.error("Couldn't load page", err));
   };
-/* Por favor, aguarde o contato da nossa equipe para a realização do
-pagamento do app para a validação do cadastro, prazo de 24h. */
+  /* Por favor, aguarde o contato da nossa equipe para a realização do
+  pagamento do app para a validação do cadastro, prazo de 24h. */
   return (
     <View style={styles.container}>
       <View style={{ width: 50, display: "flex", alignItems: "center" }}>
@@ -18,7 +40,7 @@ pagamento do app para a validação do cadastro, prazo de 24h. */
       </View>
       <View style={styles.box}>
         <Text style={styles.exclamation}>!</Text>
-        <Text style={styles.text}>Entre em contato com o suporte através do e-mail:</Text ><Text style={{color: 'black'}}>batalhadoss94@gmail.com</Text>
+        <Text style={styles.text}>Entre em contato com o suporte através do e-mail:</Text ><Text style={{ color: 'black' }}>batalhadoss94@gmail.com</Text>
       </View>
       <Text style={styles.text2} onPress={() => navigation.navigate("Login")}>
         Voltar ao Login

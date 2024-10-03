@@ -19,19 +19,12 @@ const [initialRoute, setInitialRoute] = useState("Login"); */
 const Stack = createNativeStackNavigator();
 
 
-const linking = {
-  prefixes: ["sjurados://"],  // Scheme definido no app.json
-  config: {
-    screens: {
-      Cadastro: "cadastro",
-    },
-  },
-};
+
 
 export default function Routes() {
 
   return (
-    <NavigationContainer independent={true} linking={linking} >
+    <NavigationContainer independent={true} >
       <Stack.Navigator
         screenOptions={{ headerShown: false }}
         initialRouteName='Login'
