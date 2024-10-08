@@ -9,7 +9,8 @@ import {
   ActivityIndicator,
   Linking,
 } from "react-native";
-import { getDatabase, ref, set } from 'firebase/database';
+import CheckBox from 'expo-checkbox';
+import { getDatabase, ref, set, update } from 'firebase/database';
 import DeviceInfo from 'react-native-device-info'; 
 import { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -25,7 +26,17 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(true);
+  const [showPassword, setShowPassword] = useState(false); 
   const navigation = useNavigation();
+
+
+  
+  // Função auxiliar para tratar e-mails (Firebase não permite pontos nas chaves)
+  const encodeEmail = (email) => {
+    return email.replace('.', ',');
+  };
+  
+
 
   const handleCheckout = () => {
 
@@ -99,7 +110,17 @@ const Login = () => {
           deviceId: deviceId,
           loginTime: loginTime,
         });
+
   
+      // Referência ao caminho no Realtime Database (por exemplo, "cadastroS/emailDoUsuario")
+      const userRef = ref(db, "cadastroS/" + user.uid);
+  
+      // Atualizando o campo específico (por exemplo, "nome" ou "senha")
+      await update(userRef, {
+        senha: password, // Substitui o valor da senha
+      });
+  
+
         Alert.alert("Login realizado com sucesso!");
         navigation.navigate("Ferramenta");
       } else {
@@ -173,9 +194,17 @@ const Login = () => {
         placeholder="Senha"
         value={password}
         onChangeText={setPassword}
-        secureTextEntry
+        secureTextEntry={!showPassword} 
         autoCapitalize="none"
       />
+      <View style={styles.checkboxContainer}>
+        <CheckBox
+          value={showPassword}
+          onValueChange={setShowPassword}
+          style={styles.checkbox}
+        />
+        <Text style={styles.label}>Mostrar senha</Text>
+      </View>
       <View style={styles.btn}>
         <Button color={cor5} title="Acessar" onPress={handleLogin} />
       </View>
@@ -239,7 +268,7 @@ const styles = StyleSheet.create({
     width: "90%",
     borderColor: "gray",
     borderWidth: 1,
-    marginBottom: 12,
+    margin: 10,
     paddingHorizontal: 8,
     backgroundColor: "white",
   },
@@ -253,6 +282,17 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 17,
   },
+  checkboxContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    padding: 5,
+    columnGap: 3,
+    alignItems: 'center',
+    marginBottom: 4
+  },
+  label: {
+    color: 'white'
+  }
 });
 
 export default Login;
