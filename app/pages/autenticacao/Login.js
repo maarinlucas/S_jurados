@@ -9,6 +9,8 @@ import {
   ActivityIndicator,
   Linking,
 } from "react-native";
+import { getDatabase, ref, set } from 'firebase/database';
+import DeviceInfo from 'react-native-device-info'; 
 import { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
@@ -16,6 +18,8 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../src/firebaseConection";
 import { corFundo, cor5 } from "../colors";
 import { FirebaseError } from "firebase/app";
+import { format } from 'date-fns'; // Importando a função de formatação
+import { ptBR } from 'date-fns/locale'; // Importando a localidade (opcional, mas recomendado para português)
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -73,62 +77,64 @@ const Login = () => {
 
   const handleLogin = async () => {
     try {
-      const userCredential = await signInWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
-
-      await AsyncStorage.setItem("email", email);
-      await AsyncStorage.setItem("password", password);
-
-      Alert.alert("Login realizado com sucesso!");
-      navigation.navigate("Ferramenta");
-
-        if (user.emailVerified) {
-          // Armazena email e senha no AsyncStorage
-          await AsyncStorage.setItem("email", email);
-          await AsyncStorage.setItem("password", password);
-
-          Alert.alert("Login realizado com sucesso!");
-          navigation.navigate("Ferramenta");
-        } else {
-          // Se o email não estiver verificado, desloga o usuário
-          await auth.signOut();
-          Alert.alert("Por favor, verifique seu e-mail antes de fazer login.");
-        }
+  
+      // Verifica se o e-mail foi confirmado
+      if (user.emailVerified) {
+        // Armazena email e senha no AsyncStorage
+        await AsyncStorage.setItem("email", email);
+        await AsyncStorage.setItem("password", password);
+  
+        // Obtem o número único do dispositivo
+        const deviceId = await DeviceInfo.getUniqueId();
+        const loginTime = format(new Date(), "dd/MM/yyyy HH:mm:ss", { locale: ptBR }); // Formato legível
+  
+        // Armazenando dados no Realtime Database
+        const db = getDatabase();
+        const logRef = ref(db, 'logins/' + `${deviceId} - ` + user.uid); // Caminho onde os dados serão armazenados
+  
+        await set(logRef, {
+          email: email,
+          deviceId: deviceId,
+          loginTime: loginTime,
+        });
+  
+        Alert.alert("Login realizado com sucesso!");
+        navigation.navigate("Ferramenta");
+      } else {
+        // Se o e-mail não estiver verificado, desloga o usuário
+        await auth.signOut();
+        Alert.alert("Por favor, verifique seu e-mail antes de fazer login.");
+      }
     } catch (error) {
       if (error instanceof FirebaseError) {
         let errorMessage;
-
+  
         switch (error.code) {
           case "auth/invalid-credential":
-            errorMessage = "A senha e/ou email inseridos não são válidos";
+            errorMessage = "A senha e/ou email inseridos não são válidos.";
             break;
           case "auth/invalid-email":
             errorMessage = "O e-mail inserido não é válido.";
             break;
           case "auth/user-disabled":
-            errorMessage =
-              "Esta conta foi desativada. Entre em contato com o suporte.";
+            errorMessage = "Esta conta foi desativada. Entre em contato com o suporte.";
             break;
           case "auth/user-not-found":
             errorMessage = "Nenhuma conta encontrada com este e-mail.";
             break;
           case "auth/network-request-failed":
-            errorMessage =
-              "Não foi possível conectar ao servidor. Verifique sua conexão com a internet.";
+            errorMessage = "Não foi possível conectar ao servidor. Verifique sua conexão com a internet.";
             break;
           case "auth/too-many-requests":
-            errorMessage =
-              "O acesso a esta conta foi temporariamente desativado devido a muitas tentativas de login malsucedidas. Você pode restaurá-lo imediatamente redefinindo sua senha ou tentar novamente mais tarde.";
+            errorMessage = "O acesso a esta conta foi temporariamente desativado devido a muitas tentativas de login malsucedidas. Você pode restaurá-lo imediatamente redefinindo sua senha ou tentar novamente mais tarde.";
             break;
           default:
-            errorMessage = `Erro inesperado: ${error.message}`; // Mostra a mensagem de erro para depuração
+            errorMessage = `Erro inesperado: ${error.message}`;
             break;
         }
-
+  
         Alert.alert("Erro ao realizar login", errorMessage);
       } else {
         // Caso não seja um erro do Firebase, exibe uma mensagem genérica
