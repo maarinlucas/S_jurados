@@ -34,7 +34,9 @@ import {
   cor3k,
   cor3l,
 } from "../colors";
-import { logout } from "../authService";
+import { signOut } from "firebase/auth";
+
+import { auth } from "../../src/firebaseConection";
 
 export default function Ferramenta() {
   const navigation = useNavigation();
@@ -215,17 +217,25 @@ export default function Ferramenta() {
     setModalVisible2(false);
   };
 
-  const handleLogout = () => {
-    logout()
-      .then(() => {
-        navigation.reset({
-          index: 0,
-          routes: [{ name: "Login" }],
-        });
-      })
-      .catch((error) => {
-        console.error("Erro ao deslogar: ", error);
+  const handleLogout = async () => {
+    try {
+      // Deslogar o usuário utilizando o Firebase
+      await signOut(auth);
+  
+      // Remover credenciais do AsyncStorage para desativar login automático
+      await AsyncStorage.removeItem("email");
+      await AsyncStorage.removeItem("password");
+  
+      // Redefine a navegação e envia o usuário para a tela de Login
+      navigation.reset({
+        index: 0,
+        routes: [{ name: "Login" }],
       });
+  
+      alert("Usuário deslogado com sucesso.");
+    } catch (error) {
+      alert(error);
+    }
   };
 
   const [selectedIds, setSelectedIds] = useState([]);
