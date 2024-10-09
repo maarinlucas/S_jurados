@@ -27,14 +27,11 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
-  const [authUser, setAuthUser] = useState(null)
+  const [authUser, setAuthUser] = useState({})
   const navigation = useNavigation();
 
 
-
   // Função auxiliar para tratar e-mails (Firebase não permite pontos nas chaves)
-
-
 
 
   const handleCheckout = () => {
@@ -54,17 +51,20 @@ const Login = () => {
     const checkoutUrl = 'https://checkout-sjurados.onrender.com'; // URL do seu checkout hospedado
     Linking.openURL(checkoutUrl).catch((err) => console.error("Couldn't load page", err));
   };
-  useEffect(() => {
+
+
+
+ /*  useEffect(() => {
    
-  
     // Escuta as mudanças de estado de autenticação do usuário
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
         // Se o usuário está logado, mantém suas credenciais armazenadas
         try {
-          const savedEmail = await AsyncStorage.getItem("email");
-          const savedPassword = await AsyncStorage.getItem("password");
-        
+          const savedEmail = await AsyncStorage.getItem("email") || "";
+          const savedPassword = await AsyncStorage.getItem("password") || "";
+          setEmail(savedEmail)
+          setPassword(savedPassword)
           // Se as credenciais estão armazenadas, mantém o usuário autenticado
           if (savedEmail && savedPassword) {
             setAuthUser({
@@ -72,10 +72,11 @@ const Login = () => {
               uid: user.uid,
             });
             // Aqui você pode navegar para a tela de Ferramenta ou qualquer outra
+           
             navigation.navigate("Ferramenta");
           }
         } catch (error) {
-          console.error("Erro ao restaurar sessão: ", error);
+          Alert.alert(error);
         }
       } else {
         // Se o usuário não está logado, limpa as credenciais
@@ -83,7 +84,7 @@ const Login = () => {
           await AsyncStorage.removeItem("email");
           await AsyncStorage.removeItem("password");
         } catch (error) {
-          console.error("Erro ao limpar credenciais: ", error);
+          Alert.alert(error);
         }finally {
           setLoading(false); // Desativa o indicador de carregamento
         }
@@ -92,8 +93,16 @@ const Login = () => {
   
     // Limpeza do listener para evitar vazamentos de memória
     return () => {
+
       unsubscribe();
     };
+  }, []);
+ */
+  useEffect(() => {
+   
+   
+          setLoading(false); // Desativa o indicador de carregamento
+   
   }, []);
 
 

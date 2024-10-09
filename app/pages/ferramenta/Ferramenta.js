@@ -232,9 +232,9 @@ export default function Ferramenta() {
         routes: [{ name: "Login" }],
       });
   
-      alert("Usuário deslogado com sucesso.");
+      Alert.alert("Você foi deslogado");
     } catch (error) {
-      alert(error);
+      Alert.alert(error);
     }
   };
 
