@@ -54,7 +54,7 @@ const Login = () => {
 
 
 
- /*  useEffect(() => {
+  useEffect(() => {
    
     // Escuta as mudanças de estado de autenticação do usuário
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
@@ -97,13 +97,14 @@ const Login = () => {
       unsubscribe();
     };
   }, []);
- */
-  useEffect(() => {
+
+
+  /* useEffect(() => {
    
    
           setLoading(false); // Desativa o indicador de carregamento
    
-  }, []);
+  }, []); */
 
 
   /* const offlineEmail = "email2024";
