@@ -250,12 +250,13 @@ const Login = () => {
         autoCapitalize="none"
       />
       <View style={styles.checkboxContainer}>
+       
+        <Text style={styles.label}>Mostrar senha</Text>
         <CheckBox
           value={showPassword}
           onValueChange={setShowPassword}
           style={styles.checkbox}
         />
-        <Text style={styles.label}>Mostrar senha</Text>
       </View>
       <View style={styles.btn}>
         <Button color={cor5} title="Acessar" onPress={handleLogin} />
@@ -272,10 +273,6 @@ const Login = () => {
       <Text
         style={styles.text}
         onPress={() => {
-          Alert.alert(
-            "Aviso",
-            "Você será redirecionado a um site externo"
-          );
           handleCheckout();
         }}
       >

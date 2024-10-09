@@ -220,11 +220,11 @@ export default function Ferramenta() {
   const handleLogout = async () => {
     try {
       // Deslogar o usuário utilizando o Firebase
-      await signOut(auth);
+      await auth.signOut();
   
       // Remover credenciais do AsyncStorage para desativar login automático
-      await AsyncStorage.removeItem("email");
-      await AsyncStorage.removeItem("password");
+     /*  await AsyncStorage.removeItem("email");
+      await AsyncStorage.removeItem("password"); */
   
       // Redefine a navegação e envia o usuário para a tela de Login
       navigation.reset({
