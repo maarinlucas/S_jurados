@@ -52,19 +52,32 @@ const Login = () => {
     Linking.openURL(checkoutUrl).catch((err) => console.error("Couldn't load page", err));
   };
 
-
-
   useEffect(() => {
-   
+    const loadCredentials = async () => {
+      try {
+        // Recupera email e senha armazenados no AsyncStorage
+        const savedEmail = await AsyncStorage.getItem("email");
+        const savedPassword = await AsyncStorage.getItem("password");
+  
+        if (savedEmail) setEmail(savedEmail); // Seta o email no estado
+        if (savedPassword) setPassword(savedPassword); // Seta a senha no estado
+        
+  
+      } catch (error) {
+        console.error("Erro ao carregar credenciais: ", error);
+      }finally{
+        setLoading(false);
+      } 
+    };
+  
     // Escuta as mudanças de estado de autenticação do usuário
-    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+  /*   const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
         // Se o usuário está logado, mantém suas credenciais armazenadas
         try {
-          const savedEmail = await AsyncStorage.getItem("email") || "";
-          const savedPassword = await AsyncStorage.getItem("password") || "";
-          setEmail(savedEmail)
-          setPassword(savedPassword)
+          const savedEmail = await AsyncStorage.getItem("email");
+          const savedPassword = await AsyncStorage.getItem("password");
+  
           // Se as credenciais estão armazenadas, mantém o usuário autenticado
           if (savedEmail && savedPassword) {
             setAuthUser({
@@ -72,11 +85,10 @@ const Login = () => {
               uid: user.uid,
             });
             // Aqui você pode navegar para a tela de Ferramenta ou qualquer outra
-           
             navigation.navigate("Ferramenta");
           }
         } catch (error) {
-          Alert.alert(error);
+          console.error("Erro ao restaurar sessão: ", error);
         }
       } else {
         // Se o usuário não está logado, limpa as credenciais
@@ -84,19 +96,23 @@ const Login = () => {
           await AsyncStorage.removeItem("email");
           await AsyncStorage.removeItem("password");
         } catch (error) {
-          Alert.alert(error);
-        }finally {
-          setLoading(false); // Desativa o indicador de carregamento
+          console.error("Erro ao limpar credenciais: ", error);
         }
       }
     });
-  
+   */
+    // Carrega as credenciais salvas ao inicializar o componente
+    loadCredentials();
+   
     // Limpeza do listener para evitar vazamentos de memória
-    return () => {
 
+   /*  return () => {
       unsubscribe();
     };
+     */
   }, []);
+
+
 
 
   /* useEffect(() => {
@@ -155,6 +171,7 @@ const Login = () => {
 
 
         Alert.alert("Login realizado com sucesso!");
+        setLoading(true);
         navigation.navigate("Ferramenta");
       } else {
         // Se o e-mail não estiver verificado, desloga o usuário
