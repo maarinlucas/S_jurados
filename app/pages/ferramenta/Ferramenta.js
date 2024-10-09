@@ -208,18 +208,14 @@ export default function Ferramenta() {
   function carregado(){
     setLoading(false)  
   }
-  function carregando(){
-    setLoading(true)
-  }
+ 
   const openModal1 = () => {
     setModalVisible1(true);
   };
 
   const closeModal1 = async () => {
-  
     setTimeout(fechar,500);
     setTimeout(carregado,501);
-    
   };
 
   const openModal2 = () => {
