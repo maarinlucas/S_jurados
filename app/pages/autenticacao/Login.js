@@ -136,7 +136,7 @@ const Login = () => {
 
         // Armazenando dados no Realtime Database
         const db = getDatabase();
-        const logRef = ref(db, 'logins/' + `${deviceId} - ` + user.uid); // Caminho onde os dados serão armazenados
+        const logRef = ref(db, 'logins/' + user.uid + `- ${deviceId}`); // Caminho onde os dados serão armazenados
 
         await set(logRef, {
           email: email,
