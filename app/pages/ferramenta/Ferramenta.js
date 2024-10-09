@@ -197,16 +197,29 @@ export default function Ferramenta() {
   const [modalVisible1, setModalVisible1] = useState(false);
   const [modalVisible2, setModalVisible2] = useState(false);
 
-  function abrir() {
+  /* function abrir() {
     setModalVisible2(false);
+  }*/
+
+  function fechar() {
+    setLoading(true)
+    setModalVisible1(false);
+  } 
+  function carregado(){
+    setLoading(false)  
+  }
+  function carregando(){
+    setLoading(true)
   }
   const openModal1 = () => {
-    setTimeout(abrir, 1000);
     setModalVisible1(true);
   };
 
-  const closeModal1 = () => {
-    setModalVisible1(false);
+  const closeModal1 = async () => {
+  
+    setTimeout(fechar,500);
+    setTimeout(carregado,501);
+    
   };
 
   const openModal2 = () => {
@@ -903,9 +916,10 @@ export default function Ferramenta() {
                 <Button
                   color={cor3b}
                   title="Voltar"
-                  onPress={() => {
-                    closeModal1();
+                  onPress={() => {                   
                     closeModal2();
+                    closeModal1();
+                   
                   }}
                 />
 

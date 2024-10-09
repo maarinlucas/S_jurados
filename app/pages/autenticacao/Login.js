@@ -143,6 +143,8 @@ const Login = () => {
       // Verifica se o e-mail foi confirmado
       if (user.emailVerified) {
         // Armazena email e senha no AsyncStorage
+        setLoading(true);
+
         await AsyncStorage.setItem("email", email);
         await AsyncStorage.setItem("password", password);
 
@@ -171,14 +173,16 @@ const Login = () => {
 
 
         Alert.alert("Login realizado com sucesso!");
-        setLoading(true);
+        
         navigation.navigate("Ferramenta");
       } else {
         // Se o e-mail não estiver verificado, desloga o usuário
         await auth.signOut();
+        setLoading(false);
         Alert.alert("Por favor, verifique seu e-mail antes de fazer login.");
       }
     } catch (error) {
+      setLoading(false);
       if (error instanceof FirebaseError) {
         let errorMessage;
 
