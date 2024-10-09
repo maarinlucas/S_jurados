@@ -338,9 +338,9 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     padding: 5,
-    columnGap: 3,
+    columnGap: 5,
     alignItems: 'center',
-    marginBottom: 4
+    marginBottom: 6
   },
   label: {
     color: 'white'
