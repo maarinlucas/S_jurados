@@ -194,53 +194,64 @@ export default function Ferramenta() {
     .toString()
     .padStart(2, "0")}/${currentDate.getFullYear()}`;
 
-  const [modalVisible1, setModalVisible1] = useState(false);
-  const [modalVisible2, setModalVisible2] = useState(false);
+  const [historicoVisivel, setHistoricoVisivel] = useState(false);
+  const [modalVisivel, setModalVisivel] = useState(false);
 
   /* function abrir() {
-    setModalVisible2(false);
+    setModalVisivel(false);
   }*/
 
-  function fechar() {
-    setLoading(true)
-    setModalVisible1(false);
-  } 
-  function carregado(){
-    setLoading(false)  
+
+  function closeH() {
+    setHistoricoVisivel(false);
   }
- 
+
+
+  function carregado() {
+    setLoading(false)
+  }
+  function carregando() {
+    setLoading(true)
+  }
+
+  function fechar() {
+    carregando()
+    closeH()
+    setTimeout(carregado, 1000);
+
+  }
   const openModal1 = () => {
-    setModalVisible1(true);
+    setHistoricoVisivel(true);
   };
 
   const closeModal1 = async () => {
-    setTimeout(fechar,500);
-    setTimeout(carregado,501);
+    setTimeout(fechar, 500);
+    setTimeout(carregado, 501);
   };
 
   const openModal2 = () => {
-    setModalVisible2(true);
+    setModalVisivel(true);
   };
 
   const closeModal2 = () => {
-    setModalVisible2(false);
+    setModalVisivel(false);
   };
 
   const handleLogout = async () => {
     try {
       // Deslogar o usuário utilizando o Firebase
       await auth.signOut();
-  
+
       // Remover credenciais do AsyncStorage para desativar login automático
-     /*  await AsyncStorage.removeItem("email");
-      await AsyncStorage.removeItem("password"); */
-  
+      /*  await AsyncStorage.removeItem("email");
+       await AsyncStorage.removeItem("password"); */
+
       // Redefine a navegação e envia o usuário para a tela de Login
       navigation.reset({
         index: 0,
         routes: [{ name: "Login" }],
       });
-  
+
       Alert.alert("Você foi deslogado");
     } catch (error) {
       Alert.alert(error);
@@ -292,14 +303,16 @@ export default function Ferramenta() {
       ]
     );
   };
-  
+
 
   if (loading) {
     return (
-      <View style={{ flex: 1,
+      <View style={{
+        flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: corFundo}}>
+        backgroundColor: corFundo
+      }}>
         <ActivityIndicator color="#FFF" size="large" />
       </View>
     )
@@ -314,7 +327,7 @@ export default function Ferramenta() {
       keyboardDismissMode="on-drag"
     >
       <View style={styles.container}>
-        <Modal animationType="fade"  visible={modalVisible2}>
+        <Modal animationType="fade" visible={modalVisivel}>
           <SafeAreaView style={styles.container3}>
             <View style={styles.contentC}>
               <TouchableOpacity onPress={closeModal2}>
@@ -905,17 +918,17 @@ export default function Ferramenta() {
           </View>
         </View>
 
-        <Modal visible={modalVisible1}>
+        <Modal visible={historicoVisivel}>
           <View style={styles.container2}>
             <View style={styles.logoBtnB}>
               <View style={styles.btnB}>
                 <Button
                   color={cor3b}
                   title="Voltar"
-                  onPress={() => {                   
+                  onPress={() => {
                     closeModal2();
                     closeModal1();
-                   
+
                   }}
                 />
 
