@@ -52,6 +52,7 @@ export default function Ferramenta() {
   const [ponto1, setPonto1] = useState(0);
   const [ponto2, setPonto2] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [loading2, setLoading2] = useState(false);
 
 
   const zerar = () => {
@@ -202,10 +203,20 @@ export default function Ferramenta() {
   }*/
 
 
+
   function closeH() {
     setHistoricoVisivel(false);
   }
 
+  function openH() {
+    setHistoricoVisivel(true);
+  }
+ function correcaoBugLoadingOpen(){
+   setLoading2(true)
+ }
+ function correcaoBugLoadingClose(){
+  setLoading2(false)
+}
 
   function carregado() {
     setLoading(false)
@@ -214,26 +225,20 @@ export default function Ferramenta() {
     setLoading(true)
   }
 
-  function fechar() {
-    carregando()
+  const openHistorico = () => {
+    openH()
+  };
+
+  const closeHistorico = async () => {
     closeH()
-    setTimeout(carregado, 1000);
-
-  }
-  const openModal1 = () => {
-    setHistoricoVisivel(true);
   };
 
-  const closeModal1 = async () => {
-    setTimeout(fechar, 500);
-    setTimeout(carregado, 501);
-  };
 
-  const openModal2 = () => {
+  const openModal = () => {
     setModalVisivel(true);
   };
 
-  const closeModal2 = () => {
+  const closeModal = () => {
     setModalVisivel(false);
   };
 
@@ -318,6 +323,19 @@ export default function Ferramenta() {
     )
   }
 
+   if (loading2) {
+    return (
+      <View style={{
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: corFundo
+      }}>
+        <ActivityIndicator color="#FFF" size="large" />
+      </View>
+    )
+  }
+
 
 
   return (
@@ -330,7 +348,7 @@ export default function Ferramenta() {
         <Modal animationType="fade" visible={modalVisivel}>
           <SafeAreaView style={styles.container3}>
             <View style={styles.contentC}>
-              <TouchableOpacity onPress={closeModal2}>
+              <TouchableOpacity onPress={closeModal}>
                 <Image
                   style={styles.closeC}
                   source={require("../../imagens/cross.png")}
@@ -342,7 +360,7 @@ export default function Ferramenta() {
                   <Button
                     color={cor3b}
                     title="Histórico"
-                    onPress={openModal1}
+                    onPress={openHistorico}
                   />
                 </View>
 
@@ -402,7 +420,7 @@ export default function Ferramenta() {
         </View>
         <View style={styles.parte1}>
           <View style={styles.save}>
-            <TouchableOpacity onPress={openModal2} style={styles.vOpen}>
+            <TouchableOpacity onPress={openModal} style={styles.vOpen}>
               <Image
                 style={styles.open}
                 source={require("../../imagens/burguer.png")}
@@ -925,9 +943,8 @@ export default function Ferramenta() {
                 <Button
                   color={cor3b}
                   title="Voltar"
-                  onPress={() => {
-                    closeModal2();
-                    closeModal1();
+                  onPress={() => {               
+                    closeHistorico();
 
                   }}
                 />
