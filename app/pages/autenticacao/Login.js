@@ -27,7 +27,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
-  const [authUser, setAuthUser] = useState({})
+  const [authUser, setAuthUser] = useState(null)
   const navigation = useNavigation();
 
 
@@ -58,82 +58,78 @@ const Login = () => {
         // Recupera email e senha armazenados no AsyncStorage
         const savedEmail = await AsyncStorage.getItem("email");
         const savedPassword = await AsyncStorage.getItem("password");
-  
+
         if (savedEmail) setEmail(savedEmail); // Seta o email no estado
         if (savedPassword) setPassword(savedPassword); // Seta a senha no estado
-        
-  
+
+
       } catch (error) {
         console.error("Erro ao carregar credenciais: ", error);
-      }finally{
+      } finally {
         setLoading(false);
-      } 
-    };
-  
-    // Escuta as mudanças de estado de autenticação do usuário
-  /*   const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        // Se o usuário está logado, mantém suas credenciais armazenadas
-        try {
-          const savedEmail = await AsyncStorage.getItem("email");
-          const savedPassword = await AsyncStorage.getItem("password");
-  
-          // Se as credenciais estão armazenadas, mantém o usuário autenticado
-          if (savedEmail && savedPassword) {
-            setAuthUser({
-              email: user.email,
-              uid: user.uid,
-            });
-            // Aqui você pode navegar para a tela de Ferramenta ou qualquer outra
-            navigation.navigate("Ferramenta");
-          }
-        } catch (error) {
-          console.error("Erro ao restaurar sessão: ", error);
-        }
-      } else {
-        // Se o usuário não está logado, limpa as credenciais
-        try {
-          await AsyncStorage.removeItem("email");
-          await AsyncStorage.removeItem("password");
-        } catch (error) {
-          console.error("Erro ao limpar credenciais: ", error);
-        }
       }
-    });
-   */
+    };
+
+
     // Carrega as credenciais salvas ao inicializar o componente
     loadCredentials();
-   
-    // Limpeza do listener para evitar vazamentos de memória
 
-   /*  return () => {
-      unsubscribe();
-    };
-     */
+
   }, []);
 
 
 
+  useEffect(() => {
+    const unsub = onAuthStateChanged(auth, async (user) => {
 
-  /* useEffect(() => {
-   
-   
-          setLoading(false); // Desativa o indicador de carregamento
-   
-  }, []); */
+        if (user) {
+          setAuthUser({
+            email: user.email,
+            uid: user.uid
+          })
+          // Armazena email e senha no AsyncStorage
+          setLoading(true);
+
+          // Obtem o número único do dispositivo
+          const deviceId = await DeviceInfo.getUniqueId();
+          const loginTime = format(new Date(), "dd/MM/yyyy HH:mm:ss", { locale: ptBR }); // Formato legível
+
+          // Armazenando dados no Realtime Database
+          const db = getDatabase();
+          const logRef = ref(db, 'logins/' + user.uid + `- ${deviceId}`); // Caminho onde os dados serão armazenados
+
+          await set(logRef, {
+            email: email,
+            deviceId: deviceId,
+            loginTime: loginTime,
+          });
 
 
-  /* const offlineEmail = "email2024";
-  const offlineSenha = "senha2024"; */
+          // Referência ao caminho no Realtime Database (por exemplo, "cadastroS/emailDoUsuario")
+          const userRef = ref(db, "cadastroS/" + user.uid);
 
-  /*  const handleLogin = () => {
-    if (email == offlineEmail && password == offlineSenha) {
-      Alert.alert("Offline login realizado com sucesso!");
-      navigation.navigate("Ferramenta");
-    } else {
-      Alert.alert("Por favor, verifique seu e-mail antes de fazer login.");
-    }
-  }; */
+          // Atualizando o campo específico (por exemplo, "nome" ou "senha")
+          await update(userRef, {
+            senha: password, // Substitui o valor da senha
+          });
+
+
+          
+
+          navigation.navigate("Ferramenta");
+        } else {
+          // Se o e-mail não estiver verificado, desloga o usuário
+          await auth.signOut();
+          setLoading(false);
+          Alert.alert("Erro ao entrar no App! Por favor verifique sua internet.");
+        }
+        return;
+      
+    })
+  }, [])
+
+
+
 
   const handleLogin = async () => {
     try {
@@ -173,7 +169,7 @@ const Login = () => {
 
 
         Alert.alert("Login realizado com sucesso!");
-        
+
         navigation.navigate("Ferramenta");
       } else {
         // Se o e-mail não estiver verificado, desloga o usuário
@@ -254,7 +250,7 @@ const Login = () => {
         autoCapitalize="none"
       />
       <View style={styles.checkboxContainer}>
-       
+
         <Text style={styles.label}>Mostrar senha</Text>
         <CheckBox
           value={showPassword}
