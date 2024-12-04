@@ -22,6 +22,7 @@ import { FirebaseError } from "firebase/app";
 import { format } from 'date-fns'; // Importando a função de formatação
 import { ptBR } from 'date-fns/locale'; // Importando a localidade (opcional, mas recomendado para português)
 
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -65,9 +66,7 @@ const Login = () => {
 
       } catch (error) {
         console.error("Erro ao carregar credenciais: ", error);
-      } finally {
-        setLoading(false);
-      }
+      } 
     };
 
 
@@ -81,52 +80,42 @@ const Login = () => {
 
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, async (user) => {
-
-        if (user) {
-          setAuthUser({
-            email: user.email,
-            uid: user.uid
-          })
-          // Armazena email e senha no AsyncStorage
+      if (user) {
+        
+          setAuthUser({ email: user.email, uid: user.uid });
           setLoading(true);
-
-          // Obtem o número único do dispositivo
+  
           const deviceId = await DeviceInfo.getUniqueId();
-          const loginTime = format(new Date(), "dd/MM/yyyy HH:mm:ss", { locale: ptBR }); // Formato legível
-
-          // Armazenando dados no Realtime Database
+          const loginTime = format(new Date(), "dd/MM/yyyy HH:mm:ss", { locale: ptBR });
+  
+          if (!email || !password) {
+            console.error("Dados inválidos:", { email, password });
+            return;
+          }
+  
           const db = getDatabase();
-          const logRef = ref(db, 'logins/' + user.uid + `- ${deviceId}`); // Caminho onde os dados serão armazenados
-
-          await set(logRef, {
-            email: email,
-            deviceId: deviceId,
-            loginTime: loginTime,
-          });
-
-
-          // Referência ao caminho no Realtime Database (por exemplo, "cadastroS/emailDoUsuario")
-          const userRef = ref(db, "cadastroS/" + user.uid);
-
-          // Atualizando o campo específico (por exemplo, "nome" ou "senha")
-          await update(userRef, {
-            senha: password, // Substitui o valor da senha
-          });
-
-
-          
-
+          const logRef = ref(db, `logins/${user.uid}-${deviceId}`);
+  
+          await set(logRef, { email, deviceId, loginTime });
+  
+          const userRef = ref(db, `cadastroS/${user.uid}`);
+          await update(userRef, { senha: password });
+  
           navigation.navigate("Ferramenta");
-        } else {
-          // Se o e-mail não estiver verificado, desloga o usuário
+        
+      } else {
+        try {
           await auth.signOut();
-          setLoading(false);
           Alert.alert("Erro ao entrar no App! Por favor verifique sua internet.");
+        } catch (error) {
+          console.error("Erro ao deslogar:", error);
         }
-        return;
-      
-    })
-  }, [])
+        setLoading(false);
+      }
+    });
+  
+    return () => unsub();
+  }, [email, password, navigation, setLoading]);
 
 
 
@@ -273,7 +262,7 @@ const Login = () => {
       <Text
         style={styles.text}
         onPress={() => {
-          handleCheckout();
+          navigation.navigate("Cadastro");
         }}
       >
         Ainda não tem uma conta?

@@ -6,17 +6,19 @@ import {
   TextInput,
   Alert,
   Image,
-  Linking
+  Linking,
+  ActivityIndicator 
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { corFundo, cor5 } from "../colors";
 import { auth, db } from "../../src/firebaseConection";
-import { ref, set } from "firebase/database";
+import { ref, set, get, child } from 'firebase/database';
 import {
   createUserWithEmailAndPassword,
   sendEmailVerification,
 } from "firebase/auth";
+import DeviceInfo from 'react-native-device-info';
 
 // Adicione as credenciais
 
@@ -40,44 +42,77 @@ const Cadastro = () => {
         justifyContent: "center",
         alignItems: "center",
         backgroundColor: corFundo}}>
-        <ActivityIndicator color="#FFF" size="large" />
+        <ActivityIndicator color="corFundo" size="large" />
       </View>
     )
   }
   
   const navigation = useNavigation();
 
-  const handleResetPassword = async () => {
-    if (password != password2) {
-      Alert.alert("As senhas não coincidem!");
-    } else if (email == "" || name == "" || number == "" || password == "") {
-      Alert.alert("Por favor, preencha todos os campos para se registrar!");
+  const cadastrar = async () => {
+    // Obter identificador único do dispositivo
+    const deviceId = await DeviceInfo.getUniqueId();
+
+    if (password !== password2) {
+      Alert.alert("Erro", "As senhas não coincidem!");
+    } else if (!email || !name || !number || !password) {
+      Alert.alert("Erro", "Por favor, preencha todos os campos para se registrar!");
     } else {
       try {
-        const userCredential = await createUserWithEmailAndPassword(
-          auth,
-          email,
-          password
-        );
+        // Verificar se o dispositivo já está cadastrado
+        const snapshot = await get(child(ref(db), "cadastroS/"));
+        let deviceRegistered = false;
+
+        snapshot.forEach((childSnapshot) => {
+          const userData = childSnapshot.val();
+          if (userData.deviceId === deviceId) {
+            deviceRegistered = true;
+          }
+        });
+
+        if (deviceRegistered) {
+          Alert.alert(
+            "Registro Negado",
+            "Você não pode se registrar sem pagar. Caso já tenha pago, envie seu comprovante e seu e-mail para: batalhadoss94@gmail.com"
+          );
+          return;
+        }
+
+        // Autenticação do usuário
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
 
-        await sendEmailVerification(user);
-        await set(ref(db, "cadastroS/" + user.uid), {
+        const currentDate = new Date().toLocaleString();
+        await set(ref(db, `cadastroS/${user.uid}`), {
           nome: name,
           email: email,
           celular: number,
-          senha: password,
+          senha: password, // Nota: Evite armazenar senhas em texto claro em produção
+          dataCadastro: currentDate,
+          deviceId: deviceId,
         });
+
+        await sendEmailVerification(user);
         Alert.alert(
-          "E-mail de verificação enviado! Por favor, verifique seu e-mail antes de fazer login."
+          "Cadastro realizado",
+          `Um e-mail de verificação foi enviado para ${email}. Retorne ao Sjurados para logar. Caso tenha ocorrido algum erro, entre em contato pelo e-mail: batalhadoss94@gmail.com`
         );
-        await auth.signOut();
-        setName("");
-        setEmail("");
-        setPassword("");
-        navigation.navigate("Login");
+        navigation.replace("Login"); // Substitua "LoginScreen" pelo nome correto da sua tela de login
       } catch (error) {
-        Alert.alert("Erro ao realizar o cadastro:", error.message);
+        // Tratamento de erros personalizados
+        switch (error.code) {
+          case "auth/email-already-in-use":
+            Alert.alert("Erro", "Este e-mail já está em uso. Tente outro.");
+            break;
+          case "auth/invalid-email":
+            Alert.alert("Erro", "E-mail inválido. Verifique o formato.");
+            break;
+          case "auth/weak-password":
+            Alert.alert("Erro", "A senha deve ter pelo menos 6 caracteres.");
+            break;
+          default:
+            Alert.alert("Erro", `Erro ao realizar o cadastro: ${error.message}`);
+        }
       }
     }
   };
@@ -130,15 +165,12 @@ const Cadastro = () => {
         autoCapitalize="none"
       />
       <View style={styles.btn}>
-        <Button color={cor5} title="Cadastrar" onPress={handleResetPassword} />
+        <Button color={cor5} title="Cadastrar" onPress={cadastrar} />
       </View>
       <Text
         style={styles.text}
         onPress={() => {
-          navigation.reset({
-            index: 0,
-            routes: [{ name: "/login" }],
-          });
+          navigation.navigate("Login");
         }}
       >
         Voltar ao Login
