@@ -27,7 +27,7 @@
     "asyncstorage": "^1.5.0",
     "cors": "^2.8.5",
     "date-fns": "^4.0.0-beta.1",
-    "eas-cli": "^13.4.2",
+    "eas-cli": "^13.0.0",
     "expo": "~51.0.20",
     "expo-checkbox": "~3.0.0",
     "expo-constants": "~16.0.2",
@@ -58,7 +58,6 @@
     "react-native-url-polyfill": "^2.0.0",
     "react-native-web": "~0.19.10",
     "react-native-webview": "^13.12.2",
-    "stripe": "^16.11.0",
     "uuid": "^10.0.0"
   },
   "devDependencies": {
