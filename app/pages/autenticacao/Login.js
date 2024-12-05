@@ -106,7 +106,6 @@ const Login = () => {
       } else {
         try {
           await auth.signOut();
-          Alert.alert("Erro ao entrar no App! Por favor verifique sua internet.");
         } catch (error) {
           console.error("Erro ao deslogar:", error);
         }
